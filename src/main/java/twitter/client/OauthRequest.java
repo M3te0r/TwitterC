@@ -26,10 +26,6 @@ public class OauthRequest extends JFrame {
     private Token accessToken;
     private AnchorPane anchorPane;
     private OAuthService service;
-    private static final String AUTHORIZATION_URL = "https://api.twitter.com/oauth/authorize";
-
-    private static final String ACCESS_TOKEN_URL = "https://api.twitter.com/oauth/access_token";
-    private static final String REQUEST_TOKEN_URL = "https://api.twitter.com/oauth/request_token";
     private static final String REST_API_URL = "https://api.twitter.com/1.1/";
     private static final String ACCOUNT_VERIF = "account/verify_credentials.json";
 
