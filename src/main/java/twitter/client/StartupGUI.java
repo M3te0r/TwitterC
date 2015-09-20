@@ -1,5 +1,5 @@
 package twitter.client;
-
+import twitter.client.oauth.OAuthResource;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,16 +14,12 @@ public class StartupGUI extends JFrame {
     public StartupGUI() {
         super("Home");
 
+        OAuthResource resource = OAuthResource.getInstance();
         setContentPane(panel1);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
-        seConnecterButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new OauthRequest();
-            }
-        });
+        seConnecterButton.addActionListener(e -> resource.requestAccessToken());
     }
 }

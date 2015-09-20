@@ -7,11 +7,10 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import org.scribe.builder.ServiceBuilder;
-import org.scribe.builder.api.TwitterApi;
 import org.scribe.model.*;
 import org.scribe.oauth.OAuthService;
 import org.w3c.dom.NodeList;
+import twitter.client.oauth.OAuthResource;
 import javax.swing.*;
 
 /**
@@ -22,20 +21,13 @@ public class OauthRequest extends JFrame {
     private JFXPanel jfpanel2;
     private WebEngine webEngine;
     private WebView webBrowser;
-    private Token requestToken;
-    private Token accessToken;
     private AnchorPane anchorPane;
-    private OAuthService service;
-    private static final String REST_API_URL = "https://api.twitter.com/1.1/";
-    private static final String ACCOUNT_VERIF = "account/verify_credentials.json";
-
     public OauthRequest() {
-        super("Twitter Authorization");
+        super();
         setContentPane(panel1);
         pack();
         setVisible(true);
         setLocationRelativeTo(null);
-        createTokenRequest();
     }
 
     public void loadPage(String urlPage){
@@ -53,31 +45,12 @@ public class OauthRequest extends JFrame {
                     org.w3c.dom.Document doc = webEngine.getDocument();
                     NodeList a = doc.getDocumentElement().getElementsByTagName("code");
                     if (a.getLength() == 1){
-                        accessToken = service.getAccessToken(requestToken, new Verifier(a.item(0).getTextContent()));
-                        OAuthRequest request = new OAuthRequest(Verb.GET, REST_API_URL + ACCOUNT_VERIF);
-                        service.signRequest(accessToken, request);
-                        Response response = request.send();
-                        System.out.println(response.getCode());
-                        System.out.println(response.getBody());
+                        OAuthResource oAuthResource = OAuthResource.getInstance();
+                        oAuthResource.createAccessToken(a.item(0).getTextContent());
                     }
                 }
             });
 
         });
     }
-
-    public void createTokenRequest(){
-        service = new ServiceBuilder()
-        .provider(TwitterApi.class)
-        .apiKey("api key here")
-        .apiSecret("secret api here")
-        .build();
-        requestToken = service.getRequestToken();
-        String authUrl = service.getAuthorizationUrl(requestToken);
-        loadPage(authUrl);
-    }
-
-//    public String makeOauthRequest(String ressourceURI){
-//
-//    }
 }
