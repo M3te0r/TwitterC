@@ -1,10 +1,16 @@
 package twitter.client.oauth;
 
+import com.sun.istack.internal.Nullable;
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.builder.api.TwitterApi;
 import org.scribe.model.*;
 import org.scribe.oauth.OAuthService;
 import twitter.client.OauthRequest;
+import twitter.client.TwitterW;
+
+import javax.swing.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Mathieu on 20/09/2015.
@@ -16,7 +22,6 @@ public class OAuthResource {
     private OAuthService service;
 
     private static final String REST_API_URL = "https://api.twitter.com/1.1/";
-    private static final String ACCOUNT_VERIF = "account/verify_credentials.json";
     private static class SingletonHandler{
         private static final OAuthResource instance = new OAuthResource();
     }
@@ -33,10 +38,10 @@ public class OAuthResource {
                 .build();
     }
 
-    public void requestAccessToken(){
+    public void requestAccessToken(JFrame frame){
         requestToken = service.getRequestToken();
         String authUrl = service.getAuthorizationUrl(requestToken);
-        new OauthRequest().loadPage(authUrl);
+        new OauthRequest().loadPage(authUrl, frame);
     }
 
     public Token getRequestToken() {
@@ -47,15 +52,28 @@ public class OAuthResource {
         return accessToken;
     }
 
-    public void setAccessToken(Token accessToken) {
-        this.accessToken = accessToken;
+    /**
+     *
+     * @param resourceUri Distant ressource URI completing API Host
+     * @param parameters
+     * @return String representation of returned JSON
+     */
+    public Response makeGETRequest(String resourceUri,@Nullable Map<String, String> parameters){
+        OAuthRequest request = new OAuthRequest(Verb.GET, REST_API_URL + resourceUri);
+        if (parameters != null) parameters.forEach(request::addQuerystringParameter);
+        service.signRequest(accessToken, request);
+        return request.send();
     }
+
+    /* POST form encoded ?*/
+    public Response makePOSTRequest(String resourceUri, Map<String, String> parameters){
+        OAuthRequest request = new OAuthRequest(Verb.POST, REST_API_URL + resourceUri);
+        parameters.forEach(request::addQuerystringParameter);
+        service.signRequest(accessToken, request);
+        return request.send();
+    }
+
     public void createAccessToken(String code){
         accessToken = service.getAccessToken(requestToken, new Verifier(code));
-        OAuthRequest request = new OAuthRequest(Verb.GET, REST_API_URL + ACCOUNT_VERIF);
-        service.signRequest(accessToken, request);
-        Response response = request.send();
-        System.out.println(response.getCode());
-        System.out.println(response.getBody());
     }
 }

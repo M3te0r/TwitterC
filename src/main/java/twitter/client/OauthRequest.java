@@ -7,8 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import org.scribe.model.*;
-import org.scribe.oauth.OAuthService;
 import org.w3c.dom.NodeList;
 import twitter.client.oauth.OAuthResource;
 import javax.swing.*;
@@ -30,7 +28,7 @@ public class OauthRequest extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    public void loadPage(String urlPage){
+    public void loadPage(String urlPage, JFrame frame){
         Platform.runLater(() -> {
             webBrowser = new WebView();
             webEngine = webBrowser.getEngine();
@@ -47,6 +45,9 @@ public class OauthRequest extends JFrame {
                     if (a.getLength() == 1){
                         OAuthResource oAuthResource = OAuthResource.getInstance();
                         oAuthResource.createAccessToken(a.item(0).getTextContent());
+                        this.dispose();
+                        frame.dispose();
+                        SwingUtilities.invokeLater(TwitterW::new);
                     }
                 }
             });
