@@ -11,7 +11,7 @@ public class StartupGUI extends JFrame {
 
     public StartupGUI() {
         super("Home");
-
+        setIconImage(new ImageIcon(StartupGUI.class.getResource("/icons/main_twitterC.png")).getImage());
         OAuthResource resource = OAuthResource.getInstance();
         setContentPane(panel1);
         pack();

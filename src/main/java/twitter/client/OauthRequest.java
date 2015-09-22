@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import org.w3c.dom.NodeList;
+import sun.tools.jar.Main;
 import twitter.client.oauth.OAuthResource;
 import javax.swing.*;
 
@@ -22,6 +23,7 @@ public class OauthRequest extends JFrame {
     private AnchorPane anchorPane;
     public OauthRequest() {
         super();
+        setIconImage(new ImageIcon(OAuthResource.class.getResource("/icons/main_twitterC.png")).getImage());
         setContentPane(panel1);
         pack();
         setVisible(true);

@@ -10,13 +10,15 @@ import java.awt.event.ActionListener;
 public class TwitterW extends JFrame {
     private JPanel rootPanel;
     private JButton button1;
-    private JButton NEWTWEETButton;
     private JPanel leftDockPanel;
-    private JPanel leftDockNewTweetPanel;
+    private JTextField textField1;
+    private JButton tweetButton;
+    private JButton dismissButton;
+    private JPanel newTweetPanel;
 
     public TwitterW(){
         super("Twitter Client");
-
+        setIconImage(new ImageIcon(TwitterW.class.getResource("icons/main_twitterC.png")).getImage());
         setContentPane(rootPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -25,7 +27,7 @@ public class TwitterW extends JFrame {
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                leftDockNewTweetPanel.setVisible(true);
+                newTweetPanel.setVisible(true);
             }
         });
     }
