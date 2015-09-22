@@ -15,10 +15,12 @@ public class TwitterW extends JFrame {
     private JButton tweetButton;
     private JButton dismissButton;
     private JPanel newTweetPanel;
+    private JList list1;
+    private JList list2;
 
     public TwitterW(){
         super("Twitter Client");
-        setIconImage(new ImageIcon(TwitterW.class.getResource("icons/main_twitterC.png")).getImage());
+        setIconImage(new ImageIcon(TwitterW.class.getResource("/icons/main_twitterC.png")).getImage());
         setContentPane(rootPanel);
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
