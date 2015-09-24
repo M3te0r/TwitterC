@@ -29,5 +29,11 @@ public class TwitterRest {
 
     }
 
+    public Response getUserInformationsUponAuth()
+    {
+        return authResource.makeGETRequest(ACCOUNT_VERIF, null);
+
+    }
+
 
 }
