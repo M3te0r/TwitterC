@@ -1,5 +1,6 @@
 package twitter.client;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.scribe.model.Response;
 import twitter.client.rest.TwitterRest;
@@ -59,6 +60,22 @@ public class TwitterW extends JFrame {
 
     private void initGUI(){
         Response responseUserInfo = twitterRest.getUserInformationsUponAuth();
+        Response response = twitterRest.getUserTweets();
+        JSONArray array = new JSONArray(response.getBody());
+        list1.setCellRenderer(new CellRenderer());
+        DefaultListModel model = new DefaultListModel();
+        list1.setModel(model);
+
+        for (int i = 0; i < array.length(); i++){
+            JSONObject object = array.getJSONObject(i);
+            TweetModel tweetModel = null;
+            tweetModel = new TweetModel(object.getString("text"));
+
+            model.addElement(tweetModel);
+
+
+        }
+
         JSONObject obj = new JSONObject(responseUserInfo.getBody());
         userProfileDescription.setText(obj.getString("description"));
         screenName.setText("@" + obj.getString("screen_name"));

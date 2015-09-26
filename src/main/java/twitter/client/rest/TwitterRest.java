@@ -13,20 +13,15 @@ public class TwitterRest {
     private OAuthResource authResource;
     private static final String ACCOUNT_VERIF = "account/verify_credentials.json";
     private static final String USER_TIMELINE = "statuses/user_timeline.json";
+    private static final String FRIENDS_TIMELINE ="";
 
 
     public TwitterRest(){
         this.authResource = OAuthResource.getInstance();
     }
 
-    public void getUserTweets(){
-        Response response = authResource.makeGETRequest(USER_TIMELINE, null);
-        JSONArray obj = new JSONArray(response.getBody());
-        for (int i = 0; i < obj.length(); i++){
-            System.out.println(obj.get(i));
-        }
-
-
+    public Response getUserTweets(){
+        return authResource.makeGETRequest(USER_TIMELINE, null);
     }
 
     public Response getUserInformationsUponAuth()

@@ -189,7 +189,9 @@
                 <children>
                   <component id="5a177" class="javax.swing.JList" binding="list1" default-binding="true">
                     <constraints/>
-                    <properties/>
+                    <properties>
+                      <enabled value="true"/>
+                    </properties>
                   </component>
                 </children>
               </scrollpane>
