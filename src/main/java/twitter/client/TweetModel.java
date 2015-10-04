@@ -1,5 +1,7 @@
 package twitter.client;
 
+import com.sun.istack.internal.Nullable;
+
 import javax.swing.*;
 
 /**
@@ -8,17 +10,24 @@ import javax.swing.*;
 public class TweetModel {
 
     private String tweetText;
-    Icon userTweetIcon;
+    private ImageIcon userTweetIcon;
+
+
 
     public TweetModel(String tweetText) {
         this.tweetText = tweetText;
+//        this.userTweetIcon = new ImageIcon(TweetModel.class.getResource("/icons/blank_pp.png"));
+    }
+
+    public void setUserTweetIcon(ImageIcon userTweetIcon) {
+        this.userTweetIcon = userTweetIcon;
     }
 
     public String getTweetText() {
         return tweetText;
     }
 
-    public Icon getUserTweetIcon() {
+    public ImageIcon getUserTweetIcon() {
         return userTweetIcon;
     }
 }

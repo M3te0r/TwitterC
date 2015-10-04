@@ -57,6 +57,8 @@ public class OAuthResource {
      * @param resourceUri Distant ressource URI completing API Host
      * @param parameters
      * @return String representation of returned JSON
+     *
+     * Call in AsyncTask
      */
     public Response makeGETRequest(String resourceUri,@Nullable Map<String, String> parameters){
         OAuthRequest request = new OAuthRequest(Verb.GET, REST_API_URL + resourceUri);
@@ -66,6 +68,14 @@ public class OAuthResource {
     }
 
     /* POST form encoded ?*/
+
+    /**
+     *
+     * @param resourceUri
+     * @param parameters
+     * @return
+     * //Call in AsyncTask
+     */
     public Response makePOSTRequest(String resourceUri, Map<String, String> parameters){
         OAuthRequest request = new OAuthRequest(Verb.POST, REST_API_URL + resourceUri);
         parameters.forEach(request::addQuerystringParameter);

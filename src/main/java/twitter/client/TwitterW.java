@@ -4,13 +4,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.scribe.model.Response;
 import twitter.client.rest.TwitterRest;
+import utils.TaskLoader;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Created by Mathieu on 19/09/2015.
@@ -28,8 +28,8 @@ public class TwitterW extends JFrame {
     private JTextArea userProfileDescription;
     private JList list1;
     private JList list2;
-    private JButton button2;
-    private JButton button3;
+    private JButton reloadTimelineButton;
+    private JButton reloadHomeButton;
     private JLabel screenName;
     private TwitterRest twitterRest;
 
@@ -58,34 +58,53 @@ public class TwitterW extends JFrame {
         initGUI();
     }
 
-    private void initGUI(){
-        Response responseUserInfo = twitterRest.getUserInformationsUponAuth();
-        Response response = twitterRest.getUserTweets();
+    private void renderProfileImage(ImageIcon icon){
+        userProfilePicture.setIcon(icon);
+    }
+
+    private void renderProfileBanner(ImageIcon icon){
+        userProfileBanner.setIcon(new ImageIcon(icon.getImage().getScaledInstance(160, 120, Image.SCALE_SMOOTH)));
+    }
+    //TODO  : Load timelines and process
+    private void loadUserTweetData(){
+        CompletableFuture.supplyAsync(twitterRest::getUserTweets).thenAccept(this::processTimeline);
+    }
+
+    private void processTimeline(Response response){
         JSONArray array = new JSONArray(response.getBody());
         list1.setCellRenderer(new CellRenderer());
         DefaultListModel model = new DefaultListModel();
         list1.setModel(model);
-
         for (int i = 0; i < array.length(); i++){
             JSONObject object = array.getJSONObject(i);
             TweetModel tweetModel = null;
-            tweetModel = new TweetModel(object.getString("text"));
-
+            JSONObject userObject = object.getJSONObject("user");
+            String urlProfilePicture = userObject.getString("profile_image_url_https");
+            String twee = object.getString("text");
+            tweetModel = new TweetModel(twee);
+//            CompletableFuture.supplyAsync(() -> TaskLoader.downloadImageFromString(urlProfilePicture)).thenAccept(tweetModel::setUserTweetIcon);
             model.addElement(tweetModel);
-
-
         }
 
-        JSONObject obj = new JSONObject(responseUserInfo.getBody());
+    }
+
+    /**
+     * Process loading user tweets in an asyncTask
+     */
+    private void loadUserInformation(){
+        CompletableFuture.supplyAsync(twitterRest::getUserInformationsUponAuth).thenAccept(this::processUserInformation);
+    }
+
+    private void processUserInformation(Response response){
+        JSONObject obj = new JSONObject(response.getBody());
         userProfileDescription.setText(obj.getString("description"));
         screenName.setText("@" + obj.getString("screen_name"));
-        try {
-            userProfileBanner.setIcon(new ImageIcon(new ImageIcon(new URL(obj.getString("profile_banner_url"))).getImage().getScaledInstance(160, 120, Image.SCALE_SMOOTH)));
-            userProfilePicture.setIcon(new ImageIcon(new URL(obj.getString("profile_image_url_https"))));
+        CompletableFuture.supplyAsync(() -> TaskLoader.downloadImageFromString(obj.getString("profile_image_url"))).thenAccept(this::renderProfileImage);
+        CompletableFuture.supplyAsync(() -> TaskLoader.downloadImageFromString(obj.getString("profile_banner_url"))).thenAccept(this::renderProfileBanner);
+    }
 
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
+    private void initGUI(){
+        loadUserInformation();
+        loadUserTweetData();
     }
 }
