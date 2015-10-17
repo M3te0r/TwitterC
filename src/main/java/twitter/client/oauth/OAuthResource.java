@@ -19,7 +19,7 @@ public class OAuthResource {
 
     private Token accessToken;
     private Token requestToken;
-    private OAuthService service;
+    private final OAuthService service;
 
     private static final String REST_API_URL = "https://api.twitter.com/1.1/";
     private static class SingletonHandler{

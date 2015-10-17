@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -26,12 +27,13 @@ public class TwitterW extends JFrame {
     private JLabel userProfilePicture;
     private JLabel userProfileBanner;
     private JTextArea userProfileDescription;
-    private JList list1;
+    private JList<TweetModel> list1;
     private JList list2;
     private JButton reloadTimelineButton;
     private JButton reloadHomeButton;
     private JLabel screenName;
-    private TwitterRest twitterRest;
+    private final TwitterRest twitterRest;
+    private DefaultListModel<TweetModel> model;
 
     public TwitterW(){
         super("Twitter Client");
@@ -42,19 +44,14 @@ public class TwitterW extends JFrame {
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        model = new DefaultListModel<>();
+        list1.setModel(model);
+        CellRenderer renderer = new CellRenderer();
+        list1.setCellRenderer(renderer);
         setVisible(true);
-        button1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                newTweetPanel.setVisible(true);
-            }
-        });
-        dismissButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                newTweetPanel.setVisible(false);
-            }
-        });
+        reloadHomeButton.addActionListener(e -> loadUserTweetData());
+        button1.addActionListener(e -> newTweetPanel.setVisible(true));
+        dismissButton.addActionListener(e -> newTweetPanel.setVisible(false));
         initGUI();
     }
 
@@ -72,20 +69,30 @@ public class TwitterW extends JFrame {
 
     private void processTimeline(Response response){
         JSONArray array = new JSONArray(response.getBody());
-        list1.setCellRenderer(new CellRenderer());
-        DefaultListModel model = new DefaultListModel();
-        list1.setModel(model);
         for (int i = 0; i < array.length(); i++){
             JSONObject object = array.getJSONObject(i);
-            TweetModel tweetModel = null;
-            JSONObject userObject = object.getJSONObject("user");
-            String urlProfilePicture = userObject.getString("profile_image_url_https");
-            String twee = object.getString("text");
-            tweetModel = new TweetModel(twee);
-//            CompletableFuture.supplyAsync(() -> TaskLoader.downloadImageFromString(urlProfilePicture)).thenAccept(tweetModel::setUserTweetIcon);
-            model.addElement(tweetModel);
+            if (object.getBoolean("retweeted")){
+                JSONObject rted = object.getJSONObject("retweeted_status");
+                String rtedText = rted.getString("text");
+                JSONObject user = rted.getJSONObject("user");
+                String userProfileURL = user.getString("profile_image_url_https");
+                String screenName = user.getString("screen_name");
+                TweetModel tweetModel = new TweetModel(rtedText, userProfileURL, screenName);
+                runInvokeLater(tweetModel);
+            }
+            else {
+                JSONObject userObject = object.getJSONObject("user");
+                String urlProfilePicture = userObject.getString("profile_image_url_https");
+                String twee = object.getString("text");
+                String userScreenName = userObject.getString("screen_name");
+                TweetModel tweetModel = new TweetModel(twee, urlProfilePicture, userScreenName);
+                runInvokeLater(tweetModel);
+            }
         }
+    }
 
+    private void runInvokeLater(TweetModel tweetModel){
+        SwingUtilities.invokeLater(() -> model.addElement(tweetModel));
     }
 
     /**

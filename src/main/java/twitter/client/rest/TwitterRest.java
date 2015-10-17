@@ -10,9 +10,9 @@ import twitter.client.oauth.OAuthResource;
  */
 public class TwitterRest {
 
-    private OAuthResource authResource;
+    private final OAuthResource authResource;
     private static final String ACCOUNT_VERIF = "account/verify_credentials.json";
-    private static final String USER_TIMELINE = "statuses/user_timeline.json";
+    private static final String USER_TIMELINE = "statuses/user_timeline.json?count=200";
     private static final String FRIENDS_TIMELINE ="";
 
 
@@ -27,7 +27,6 @@ public class TwitterRest {
     public Response getUserInformationsUponAuth()
     {
         return authResource.makeGETRequest(ACCOUNT_VERIF, null);
-
     }
 
 
