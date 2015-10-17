@@ -15,12 +15,18 @@ public class TweetModel {
     private final String userURLProfilIcon;
     private ImageIcon userTweetIcon;
     private boolean imageLoaded;
+    private String internalId;
 
-    public TweetModel(String tweetText, String userURLProfilIcon, String screenName) {
+    public TweetModel(String tweetText, String userURLProfilIcon, String screenName, String internalId) {
         this.tweetText = tweetText;
         this.screenName = screenName;
         this.imageLoaded = false;
         this.userURLProfilIcon = userURLProfilIcon;
+        this.internalId = internalId;
+    }
+
+    public String getInternalId() {
+        return internalId;
     }
 
     public String getUserURLProfilIcon() {
