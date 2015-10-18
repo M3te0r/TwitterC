@@ -74,12 +74,19 @@ public class TwitterW extends JFrame {
     }
 
     private void loadHomeTimeline(){
+        reloadTimelineButton.setEnabled(false);
+        reloadTimelineButton.setText("In Progress...");
         if (model2.isEmpty()){
-            CompletableFuture.supplyAsync(() -> twitterRest.getHomeTimeline(null,null)).thenAccept(a -> this.processTimeline(a, 1));
+            CompletableFuture.supplyAsync(() -> twitterRest.getHomeTimeline(null, null)).thenAccept(a -> this.processTimeline(a, 1));
         }
         else {
-            CompletableFuture.supplyAsync(() -> twitterRest.getHomeTimeline(model1.getMaxId(),null)).thenAccept(a -> this.processTimeline(a, 1));
+            CompletableFuture.supplyAsync(() -> twitterRest.getHomeTimeline(model1.getMaxId(), null)).thenAccept(a -> this.processTimeline(a, 1));
         }
+    }
+
+    public void enableButton(){
+        reloadTimelineButton.setEnabled(true);
+        reloadTimelineButton.setText("Reload timeline");
     }
 
     private void processTimeline(Response response, int list){
@@ -93,7 +100,17 @@ public class TwitterW extends JFrame {
                 String userProfileURL = user.getString("profile_image_url_https");
                 String screenName = user.getString("screen_name");
                 String userName = user.getString("name");
-                TweetModel tweetModel = new TweetModel(rtedText, userProfileURL, screenName, userName, object.getLong("id"), object.getString("created_at"));
+                TweetModel tweetModel = new TweetModel(rtedText, userProfileURL, screenName, userName, object.getLong("id"), rted.getString("created_at"));
+                runInvokeLater(tweetModel, list);
+            }
+            else if (object.has("retweeted_status")){
+                JSONObject rted = object.getJSONObject("retweeted_status");
+                String rtedText = rted.getString("text");
+                JSONObject user = rted.getJSONObject("user");
+                String userProfileURL = user.getString("profile_image_url_https");
+                String screenName = user.getString("screen_name");
+                String userName = user.getString("name");
+                TweetModel tweetModel = new TweetModel(rtedText, userProfileURL, screenName, userName, object.getLong("id"), rted.getString("created_at"));
                 runInvokeLater(tweetModel, list);
             }
             else {
@@ -106,6 +123,7 @@ public class TwitterW extends JFrame {
                 runInvokeLater(tweetModel, list);
             }
         }
+        enableButton();
     }
 
     private void runInvokeLater(TweetModel tweetModel, int list){

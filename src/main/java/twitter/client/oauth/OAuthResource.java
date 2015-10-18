@@ -6,10 +6,7 @@ import org.scribe.builder.api.TwitterApi;
 import org.scribe.model.*;
 import org.scribe.oauth.OAuthService;
 import twitter.client.OauthRequest;
-import twitter.client.TwitterW;
-
 import javax.swing.*;
-import java.util.HashMap;
 import java.util.Map;
 
 /**

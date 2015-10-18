@@ -1,10 +1,7 @@
 package twitter.client;
 
-import com.sun.istack.internal.Nullable;
 import utils.DateUtils;
-
 import javax.swing.*;
-import java.net.URL;
 import java.util.Date;
 
 /**

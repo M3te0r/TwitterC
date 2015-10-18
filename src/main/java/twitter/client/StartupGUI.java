@@ -1,8 +1,6 @@
 package twitter.client;
 import twitter.client.oauth.OAuthResource;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by Mathieu on 20/09/2015.

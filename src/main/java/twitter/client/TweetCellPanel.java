@@ -1,15 +1,15 @@
 package twitter.client;
 
-import javax.swing.*;
 
+import javax.swing.*;
 public class TweetCellPanel {
     private JLabel UserProfilePicture;
     private JPanel userNamesPanel;
-    private JLabel userTweet;
     private JPanel detailsPanel;
     private JLabel userName;
     private JLabel userScreenName;
     private JPanel mainPanel;
+    private JTextArea userTweet;
 
     public TweetCellPanel(){
         mainPanel.setIgnoreRepaint(true);

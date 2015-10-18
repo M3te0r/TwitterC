@@ -8,7 +8,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import org.w3c.dom.NodeList;
-import sun.tools.jar.Main;
 import twitter.client.oauth.OAuthResource;
 import javax.swing.*;
 
