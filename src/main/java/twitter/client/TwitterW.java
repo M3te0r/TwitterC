@@ -1,11 +1,11 @@
 package twitter.client;
 
+import model.TweetListModel;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.scribe.model.Response;
 import twitter.client.rest.TwitterRest;
 import utils.TaskLoader;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.concurrent.CompletableFuture;
@@ -30,8 +30,8 @@ public class TwitterW extends JFrame {
     private JButton reloadHomeButton;
     private JLabel screenName;
     private final TwitterRest twitterRest;
-    private DefaultListModel<TweetModel> model1;
-    private DefaultListModel<TweetModel> model2;
+    private TweetListModel model1;
+    private TweetListModel model2;
 
     public TwitterW(){
         super("Twitter Client");
@@ -42,8 +42,8 @@ public class TwitterW extends JFrame {
         pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        model1 = new DefaultListModel<>();
-        model2 = new DefaultListModel<>();
+        model1 = new TweetListModel();
+        model2 = new TweetListModel();
         list1.setModel(model1);
         list2.setModel(model2);
         CellRenderer renderer1 = new CellRenderer();
@@ -51,8 +51,8 @@ public class TwitterW extends JFrame {
         list1.setCellRenderer(renderer1);
         list2.setCellRenderer(renderer2);
         setVisible(true);
-        reloadHomeButton.addActionListener(e -> loadUserTweetData(true));
-        reloadTimelineButton.addActionListener(e -> loadHomeTimeline(true));
+        reloadHomeButton.addActionListener(e -> loadUserTweetData());
+        reloadTimelineButton.addActionListener(e -> loadHomeTimeline());
         button1.addActionListener(e -> newTweetPanel.setVisible(true));
         dismissButton.addActionListener(e -> newTweetPanel.setVisible(false));
         initGUI();
@@ -66,25 +66,23 @@ public class TwitterW extends JFrame {
         userProfileBanner.setIcon(new ImageIcon(icon.getImage().getScaledInstance(160, 120, Image.SCALE_SMOOTH)));
     }
     //TODO  : Load timelines and process
-    private void loadUserTweetData(boolean append){
+    private void loadUserTweetData(){
         if (model1.isEmpty())
         {
-            CompletableFuture.supplyAsync(() -> twitterRest.getUserTweets()).thenAccept(a -> this.processTimeline(a, 1, append));
+            CompletableFuture.supplyAsync(() -> twitterRest.getUserTweets()).thenAccept(a -> this.processTimeline(a, 2));
         }
     }
 
-    private void loadHomeTimeline(boolean append){
-        System.out.println(append);
+    private void loadHomeTimeline(){
         if (model2.isEmpty()){
-            CompletableFuture.supplyAsync(() -> twitterRest.getHomeTimeline(null,null)).thenAccept(a -> this.processTimeline(a, 2, append));
+            CompletableFuture.supplyAsync(() -> twitterRest.getHomeTimeline(null,null)).thenAccept(a -> this.processTimeline(a, 1));
         }
         else {
-            CompletableFuture.supplyAsync(() -> twitterRest.getHomeTimeline(model2.firstElement().getInternalId(),null)).thenAccept(a -> this.processTimeline(a, 2, append));
-
+            CompletableFuture.supplyAsync(() -> twitterRest.getHomeTimeline(model1.getMaxId(),null)).thenAccept(a -> this.processTimeline(a, 1));
         }
     }
 
-    private void processTimeline(Response response, int list, boolean append){
+    private void processTimeline(Response response, int list){
         JSONArray array = new JSONArray(response.getBody());
         for (int i = 0; i < array.length(); i++){
             JSONObject object = array.getJSONObject(i);
@@ -94,22 +92,22 @@ public class TwitterW extends JFrame {
                 JSONObject user = rted.getJSONObject("user");
                 String userProfileURL = user.getString("profile_image_url_https");
                 String screenName = user.getString("screen_name");
-                TweetModel tweetModel = new TweetModel(rtedText, userProfileURL, screenName, object.getString("id_str"));
-                runInvokeLater(tweetModel, list, append);
+                TweetModel tweetModel = new TweetModel(rtedText, userProfileURL, screenName, object.getLong("id"), object.getString("created_at"));
+                runInvokeLater(tweetModel, list);
             }
             else {
                 JSONObject userObject = object.getJSONObject("user");
                 String urlProfilePicture = userObject.getString("profile_image_url_https");
                 String twee = object.getString("text");
                 String userScreenName = userObject.getString("screen_name");
-                TweetModel tweetModel = new TweetModel(twee, urlProfilePicture, userScreenName, object.getString("id_str"));
-                runInvokeLater(tweetModel, list, append);
+                TweetModel tweetModel = new TweetModel(twee, urlProfilePicture, userScreenName, object.getLong("id"), object.getString("created_at"));
+                runInvokeLater(tweetModel, list);
             }
         }
     }
 
-    private void runInvokeLater(TweetModel tweetModel, int list, boolean append){
-        SwingUtilities.invokeLater(append ? list == 1 ? () -> model1.add(0, tweetModel) : () -> model2.add(0, tweetModel) : list == 1 ? () -> model1.addElement(tweetModel) : () -> model2.addElement(tweetModel));
+    private void runInvokeLater(TweetModel tweetModel, int list){
+        SwingUtilities.invokeLater(list == 1 ? () -> {model1.addElement(tweetModel); model1.sortModel();} : () -> {model2.addElement(tweetModel); model2.sortModel();});
     }
 
     /**
@@ -129,7 +127,7 @@ public class TwitterW extends JFrame {
 
     private void initGUI(){
         loadUserInformation();
-        loadUserTweetData(false);
-        loadHomeTimeline(false);
+        loadUserTweetData();
+        loadHomeTimeline();
     }
 }

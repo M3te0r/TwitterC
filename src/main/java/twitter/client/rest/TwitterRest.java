@@ -1,8 +1,6 @@
 package twitter.client.rest;
 
 import com.sun.istack.internal.Nullable;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.scribe.model.Response;
 import twitter.client.oauth.OAuthResource;
 
@@ -23,24 +21,22 @@ public class TwitterRest {
         this.authResource = OAuthResource.getInstance();
     }
 
-    public Response getHomeTimeline(@Nullable String idToLoad, @Nullable String idMax){
+    public Response getHomeTimeline(@Nullable Long idToLoad, @Nullable Long idMax){
         if (idToLoad != null){
-            return authResource.makeGETRequest(HOME_TIMELINE, new HashMap<String, String>(){{put("count", "200");put("since_id", idToLoad);}});
+            return authResource.makeGETRequest(HOME_TIMELINE, new HashMap<String, String>(){{put("count", "300"); put("since_id", idToLoad.toString());}});
         }
         else if (idMax != null){
-            return authResource.makeGETRequest(HOME_TIMELINE, new HashMap<String, String>(){{put("count", "200"); put("max_id", idMax);}});
+            return authResource.makeGETRequest(HOME_TIMELINE, new HashMap<String, String>(){{put("count", "300"); put("max_id", idMax.toString());}});
         }
-        else return authResource.makeGETRequest(HOME_TIMELINE, new HashMap<String, String>(){{put("count", "200");}});
+        else return authResource.makeGETRequest(HOME_TIMELINE, new HashMap<String, String>(){{put("count", "300");}});
     }
 
     public Response getUserTweets(){
-        return authResource.makeGETRequest(USER_TIMELINE, new HashMap<String, String>(){{put("count", "200");}});
+        return authResource.makeGETRequest(USER_TIMELINE, new HashMap<String, String>(){{put("count", "300");}});
     }
 
     public Response getUserInformationsUponAuth()
     {
         return authResource.makeGETRequest(ACCOUNT_VERIF, null);
     }
-
-
 }
