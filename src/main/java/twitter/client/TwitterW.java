@@ -92,7 +92,8 @@ public class TwitterW extends JFrame {
                 JSONObject user = rted.getJSONObject("user");
                 String userProfileURL = user.getString("profile_image_url_https");
                 String screenName = user.getString("screen_name");
-                TweetModel tweetModel = new TweetModel(rtedText, userProfileURL, screenName, object.getLong("id"), object.getString("created_at"));
+                String userName = user.getString("name");
+                TweetModel tweetModel = new TweetModel(rtedText, userProfileURL, screenName, userName, object.getLong("id"), object.getString("created_at"));
                 runInvokeLater(tweetModel, list);
             }
             else {
@@ -100,7 +101,8 @@ public class TwitterW extends JFrame {
                 String urlProfilePicture = userObject.getString("profile_image_url_https");
                 String twee = object.getString("text");
                 String userScreenName = userObject.getString("screen_name");
-                TweetModel tweetModel = new TweetModel(twee, urlProfilePicture, userScreenName, object.getLong("id"), object.getString("created_at"));
+                String userName = userObject.getString("name");
+                TweetModel tweetModel = new TweetModel(twee, urlProfilePicture, userScreenName, userName, object.getLong("id"), object.getString("created_at"));
                 runInvokeLater(tweetModel, list);
             }
         }

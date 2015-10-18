@@ -1,16 +1,14 @@
 package twitter.client;
 
-import javax.jws.soap.SOAPBinding;
 import javax.swing.*;
-import java.awt.*;
 
 public class TweetCellPanel {
     private JLabel UserProfilePicture;
     private JPanel userNamesPanel;
     private JLabel userTweet;
     private JPanel detailsPanel;
+    private JLabel userName;
     private JLabel userScreenName;
-    private JLabel userProfileAddress;
     private JPanel mainPanel;
 
     public TweetCellPanel(){
@@ -31,11 +29,11 @@ public class TweetCellPanel {
         this.UserProfilePicture.setIcon(userProfilePicture);
     }
 
-    public void setUserScreenName(String userScreenName){
-        this.userScreenName.setText(userScreenName);
+    public void setUserName(String userName){
+        this.userName.setText(userName);
     }
 
-    public void setUserProfileAddress(String userProfileAddress){
-        this.userProfileAddress.setText(userProfileAddress);
+    public void setUserScreenName(String userScreenName){
+        this.userScreenName.setText(userScreenName);
     }
 }

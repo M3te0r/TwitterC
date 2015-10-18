@@ -13,6 +13,7 @@ import java.util.Date;
 public class TweetModel implements Comparable<TweetModel>{
 
     private final String screenName;
+    private final String name;
     private final String tweetText;
     private final String userURLProfilIcon;
     private ImageIcon userTweetIcon;
@@ -20,13 +21,18 @@ public class TweetModel implements Comparable<TweetModel>{
     private long internalId;
     private Date createdAt;
 
-    public TweetModel(String tweetText, String userURLProfileIcon, String screenName, long internalId, String formattedDate) {
+    public TweetModel(String tweetText, String userURLProfileIcon, String screenName, String name,long internalId, String formattedDate) {
         this.tweetText = tweetText;
         this.screenName = screenName;
+        this.name = name;
         this.imageLoaded = false;
         this.userURLProfilIcon = userURLProfileIcon;
         this.internalId = internalId;
         this.createdAt = DateUtils.getTwitterDate(formattedDate);
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Date getCreatedAt() {
