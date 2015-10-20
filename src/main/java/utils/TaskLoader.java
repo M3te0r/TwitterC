@@ -19,8 +19,7 @@ public class TaskLoader {
         try {
             return new ImageIcon(new URL(urlProfile));
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            return new ImageIcon(TaskLoader.class.getResource("/icons/blank_pp.png"));
         }
-        return null;
     }
 }

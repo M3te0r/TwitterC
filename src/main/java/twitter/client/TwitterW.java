@@ -29,6 +29,8 @@ public class TwitterW extends JFrame {
     private JButton reloadTimelineButton;
     private JButton reloadHomeButton;
     private JLabel screenName;
+    private JScrollPane scrollPane1;
+    private JScrollPane scrollPane2;
     private final TwitterRest twitterRest;
     private TweetListModel model1;
     private TweetListModel model2;
@@ -36,7 +38,10 @@ public class TwitterW extends JFrame {
     public TwitterW(){
         super("Twitter Client");
         twitterRest = new TwitterRest();
+        scrollPane1.setColumnHeaderView(new JLabel("Home"));
+        scrollPane2.setColumnHeaderView(new JLabel("User timeline"));
         userProfilePicture.setIcon(new ImageIcon(TwitterW.class.getResource("/icons/blank_pp.png")));
+        
         setIconImage(new ImageIcon(TwitterW.class.getResource("/icons/main_twitterC.png")).getImage());
         setContentPane(rootPanel);
         pack();

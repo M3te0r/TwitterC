@@ -5,11 +5,10 @@ import javax.swing.*;
 public class TweetCellPanel {
     private JLabel UserProfilePicture;
     private JPanel userNamesPanel;
-    private JPanel detailsPanel;
     private JLabel userName;
     private JLabel userScreenName;
     private JPanel mainPanel;
-    private JTextArea userTweet;
+    private JLabel userTweet;
 
     public TweetCellPanel(){
         mainPanel.setIgnoreRepaint(true);
