@@ -74,7 +74,10 @@ public class TwitterW extends JFrame {
     private void loadUserTweetData(){
         if (model1.isEmpty())
         {
-            CompletableFuture.supplyAsync(() -> twitterRest.getUserTweets()).thenAccept(a -> this.processTimeline(a, 2));
+            CompletableFuture.supplyAsync(() -> twitterRest.getUserTweets(null, null)).thenAccept(a -> this.processTimeline(a, 2));
+        }
+        else {
+            CompletableFuture.supplyAsync(() -> twitterRest.getUserTweets(model2.getMaxId(), null)).thenAccept(a -> this.processTimeline(a, 2));
         }
     }
 

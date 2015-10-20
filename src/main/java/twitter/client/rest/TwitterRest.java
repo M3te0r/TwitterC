@@ -15,7 +15,7 @@ public class TwitterRest {
     private static final String ACCOUNT_VERIF = "account/verify_credentials.json";
     private static final String USER_TIMELINE = "statuses/user_timeline.json";
     private static final String HOME_TIMELINE ="statuses/home_timeline.json";
-
+    private static final String POST_STATUS = "statuses/update";
 
     public TwitterRest(){
         this.authResource = OAuthResource.getInstance();
@@ -31,7 +31,10 @@ public class TwitterRest {
         else return authResource.makeGETRequest(HOME_TIMELINE, new HashMap<String, String>(){{put("count", "300");}});
     }
 
-    public Response getUserTweets(){
+    public Response getUserTweets(@Nullable Long idToLoad, @Nullable Long idMax){
+        if(idToLoad != null){
+            return authResource.makeGETRequest(USER_TIMELINE, new HashMap<String, String>(){{put("count", "300"); put("since_id", idToLoad.toString());}});
+        }
         return authResource.makeGETRequest(USER_TIMELINE, new HashMap<String, String>(){{put("count", "300");}});
     }
 

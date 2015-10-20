@@ -30,29 +30,33 @@ public class OauthRequest extends JFrame {
     }
 
     public void loadPage(String urlPage, JFrame frame){
-        Platform.runLater(() -> {
-            webBrowser = new WebView();
-            webEngine = webBrowser.getEngine();
-            anchorPane = new AnchorPane();
-            anchorPane.getChildren().add(webBrowser);
-            final Scene scene = new Scene(anchorPane);
-            jfpanel2.setScene(scene);
-            webEngine.load(urlPage);
-            webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) ->
-            {
-                if (newValue == Worker.State.SUCCEEDED) {
-                    org.w3c.dom.Document doc = webEngine.getDocument();
-                    NodeList a = doc.getDocumentElement().getElementsByTagName("code");
-                    if (a.getLength() == 1){
-                        OAuthResource oAuthResource = OAuthResource.getInstance();
-                        oAuthResource.createAccessToken(a.item(0).getTextContent());
-                        this.dispose();
-                        frame.dispose();
-                        SwingUtilities.invokeLater(TwitterW::new);
-                    }
-                }
-            });
+        OAuthResource oAuthResource = OAuthResource.getInstance();
 
-        });
+        if(!oAuthResource.areTokenSet()){
+            Platform.runLater(() -> {
+                webBrowser = new WebView();
+                webEngine = webBrowser.getEngine();
+                anchorPane = new AnchorPane();
+                anchorPane.getChildren().add(webBrowser);
+                final Scene scene = new Scene(anchorPane);
+                jfpanel2.setScene(scene);
+                webEngine.load(urlPage);
+                webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) ->
+                {
+                    if (newValue == Worker.State.SUCCEEDED) {
+                        org.w3c.dom.Document doc = webEngine.getDocument();
+                        NodeList a = doc.getDocumentElement().getElementsByTagName("code");
+                        if (a.getLength() == 1){
+                            oAuthResource.createAccessToken(a.item(0).getTextContent());
+                            this.dispose();
+                            frame.dispose();
+                            SwingUtilities.invokeLater(TwitterW::new);
+                        }
+                    }
+                });
+
+            });
+        }
+        else SwingUtilities.invokeLater(TwitterW::new);
     }
 }
