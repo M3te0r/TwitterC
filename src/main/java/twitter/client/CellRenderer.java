@@ -21,6 +21,7 @@ public class CellRenderer extends JPanel implements ListCellRenderer<TweetModel>
     public Component getListCellRendererComponent(JList<? extends TweetModel> list, TweetModel value, int index, boolean isSelected, boolean cellHasFocus) {
         TweetCellPanel tweetCellPanel = new TweetCellPanel();
         JPanel panel1 = tweetCellPanel.getMainPanel();
+        panel1.setOpaque(true);
         tweetCellPanel.setUserTweet("<html><div style=\\\"width:200px;\\\">" + value.getTweetText().replaceAll("\\n", "<br>") + "</div></html>");
         tweetCellPanel.setUserName(value.getName());
         tweetCellPanel.setUserScreenName('@' + value.getScreenName());
@@ -30,7 +31,7 @@ public class CellRenderer extends JPanel implements ListCellRenderer<TweetModel>
                     value.setImageLoaded(true);
                     value.setUserTweetIcon(a);
                     tweetCellPanel.setUserProfilePicture(a);
-                    ((DefaultListModel) list.getModel()).setElementAt(value, index);
+                    ((DefaultListModel<TweetModel>) list.getModel()).setElementAt(value, index);
                 }
             });
         }

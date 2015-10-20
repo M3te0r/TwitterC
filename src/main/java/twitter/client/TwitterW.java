@@ -17,8 +17,6 @@ public class TwitterW extends JFrame {
     private JPanel rootPanel;
     private JButton button1;
     private JPanel leftDockPanel;
-    private JTextField textField1;
-    private JButton tweetButton;
     private JButton dismissButton;
     private JPanel newTweetPanel;
     private JLabel userProfilePicture;
@@ -58,8 +56,8 @@ public class TwitterW extends JFrame {
         setVisible(true);
         reloadHomeButton.addActionListener(e -> loadUserTweetData());
         reloadTimelineButton.addActionListener(e -> loadHomeTimeline());
-        button1.addActionListener(e -> newTweetPanel.setVisible(true));
-        dismissButton.addActionListener(e -> newTweetPanel.setVisible(false));
+//        button1.addActionListener(e -> newTweetPanel.setVisible(true));
+//        dismissButton.addActionListener(e -> newTweetPanel.setVisible(false));
         initGUI();
     }
 

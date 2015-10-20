@@ -5,7 +5,9 @@
     <constraints>
       <xy x="20" y="20" width="592" height="400"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-14539228"/>
+    </properties>
     <border type="line"/>
     <children>
       <component id="d5ebb" class="javax.swing.JLabel" binding="UserProfilePicture">
@@ -21,7 +23,9 @@
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-14539228"/>
+        </properties>
         <border type="none"/>
         <children>
           <component id="e6672" class="javax.swing.JLabel" binding="userName">
@@ -29,6 +33,7 @@
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <foreground color="-3355444"/>
               <text value="Label"/>
             </properties>
           </component>
@@ -37,6 +42,8 @@
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-14539228"/>
+              <foreground color="-6710887"/>
               <text value="Label"/>
             </properties>
           </component>
@@ -48,6 +55,7 @@
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <background color="-14539228"/>
           <focusable value="false"/>
           <requestFocusEnabled value="false"/>
           <verifyInputWhenFocusTarget value="false"/>
@@ -59,6 +67,8 @@
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-14539228"/>
+              <foreground color="-2236963"/>
               <text value=""/>
             </properties>
           </component>
