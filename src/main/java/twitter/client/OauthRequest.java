@@ -57,6 +57,11 @@ public class OauthRequest extends JFrame {
 
             });
         }
-        else SwingUtilities.invokeLater(TwitterW::new);
+        else {
+            this.dispose();
+            frame.dispose();
+            SwingUtilities.invokeLater(TwitterW::new);
+
+        }
     }
 }

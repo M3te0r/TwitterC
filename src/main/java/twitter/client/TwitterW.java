@@ -1,5 +1,6 @@
 package twitter.client;
 
+import border.JRoundedCornerBorder;
 import model.TweetListModel;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -29,17 +30,35 @@ public class TwitterW extends JFrame {
     private JLabel screenName;
     private JScrollPane scrollPane1;
     private JScrollPane scrollPane2;
+    private JPanel listContainerPanel;
+    private JPanel listPanel;
     private final TwitterRest twitterRest;
     private TweetListModel model1;
     private TweetListModel model2;
+    private final Color DARK1 = new Color(47,47,47);
 
     public TwitterW(){
         super("Twitter Client");
         twitterRest = new TwitterRest();
-        scrollPane1.setColumnHeaderView(new JLabel("Home"));
-        scrollPane2.setColumnHeaderView(new JLabel("User timeline"));
+        leftDockPanel.setBorder(new JRoundedCornerBorder());
+        scrollPane1.setBorder(new JRoundedCornerBorder());
+        scrollPane2.setBorder(new JRoundedCornerBorder());
+        JLabel rowLabelHome = new JLabel("Home");
+
+        rowLabelHome.setBackground(DARK1);
+        rowLabelHome.setForeground(new Color(221,221,221));
+        rowLabelHome.setFont(rowLabelHome.getFont().deriveFont(20f));
+        JLabel rowLabelUser = new JLabel("User timeline");
+        rowLabelUser.setBackground(DARK1);
+        rowLabelUser.setForeground(DARK1);
+        rowLabelUser.setFont(rowLabelHome.getFont().deriveFont(20f));
+        scrollPane2.setColumnHeaderView(rowLabelUser);
+        scrollPane1.setColumnHeaderView(rowLabelHome);
+        scrollPane1.getColumnHeader().setBackground(DARK1);
+        scrollPane2.getColumnHeader().setBackground(DARK1);
+        list1.setBorder(new JRoundedCornerBorder());
+        list2.setBorder(new JRoundedCornerBorder());
         userProfilePicture.setIcon(new ImageIcon(TwitterW.class.getResource("/icons/blank_pp.png")));
-        
         setIconImage(new ImageIcon(TwitterW.class.getResource("/icons/main_twitterC.png")).getImage());
         setContentPane(rootPanel);
         pack();
