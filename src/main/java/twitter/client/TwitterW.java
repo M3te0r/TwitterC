@@ -14,6 +14,8 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -46,8 +48,6 @@ public class TwitterW extends JFrame {
     private JTextArea textArea1;
     private JButton tweetButton;
     private JLabel nbCharTweet;
-    private JButton loadMoare1;
-    private JButton loadMoare2;
     private final TwitterRest twitterRest;
     private final TweetListModel model1;
     private final TweetListModel model2;
@@ -95,15 +95,35 @@ public class TwitterW extends JFrame {
         reloadHomeButton.addActionListener(e -> loadUserTweetData());
         reloadTimelineButton.addActionListener(e -> loadHomeTimeline());
         closeTweetPanelButton.addActionListener(e -> newTweetPanel.setVisible(false));
+        scrollPane1.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
+            boolean ready = true;
+            @Override
+            public void adjustmentValueChanged(AdjustmentEvent e) {
+                if (list1.getLastVisibleIndex() <= model1.size() && list1.getLastVisibleIndex() >= model1.size() - 15 && ready)
+                {
+                    ready = false;
+                    CompletableFuture.supplyAsync(() -> twitterRest.getHomeTimeline(null, model1.lastElement().getInternalId())).thenAccept(a -> processTimeline(a, 1)).handle((ok, err) -> ready = true);
+                }
+            }
+        });
+        scrollPane2.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
 
+            boolean ready = true;
+            @Override
+            public void adjustmentValueChanged(AdjustmentEvent e) {
+                if (list2.getLastVisibleIndex() <= model2.getSize() && list2.getLastVisibleIndex() >= model2.getSize() - 15 && ready)
+                {
+                    ready = false;
+                    CompletableFuture.supplyAsync(() -> twitterRest.getUserTweets(null, model2.lastElement().getInternalId())).thenAccept(a -> processTimeline(a, 2)).handle((ok, err) -> ready = true);
+                }
+            }
+        });
         tweetButton.addActionListener(e -> {
             if (!textArea1.getText().isEmpty())
             {
                 CompletableFuture.supplyAsync(() -> twitterRest.postTweetMessage(textArea1.getText())).thenAccept(TwitterW.this::parseNewTweet);
             }
         });
-        loadMoare1.addActionListener(e -> CompletableFuture.supplyAsync(() -> twitterRest.getHomeTimeline(null, model1.lastElement().getInternalId())).thenAccept(a -> processTimeline(a, 1)));
-        loadMoare2.addActionListener(e -> CompletableFuture.supplyAsync(() -> twitterRest.getUserTweets(null, model2.lastElement().getInternalId())).thenAccept(a -> processTimeline(a, 2)));
         pack();
         setLocation(dimScreenSize.width - getWidth(), dimScreenSize.height - taskBarSize - getHeight());
         setVisible(true);
