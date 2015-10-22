@@ -50,6 +50,7 @@ public class TwitterW extends JFrame {
     private JLabel nbCharTweet;
     private JLabel loading1;
     private JLabel loading2;
+    private JLabel userName;
     private final TwitterRest twitterRest;
     private final TweetListModel model1;
     private final TweetListModel model2;
@@ -96,7 +97,11 @@ public class TwitterW extends JFrame {
         list2.setCellRenderer(renderer2);
         reloadHomeButton.addActionListener(e -> loadUserTweetData());
         reloadTimelineButton.addActionListener(e -> loadHomeTimeline());
-        closeTweetPanelButton.addActionListener(e -> newTweetPanel.setVisible(false));
+        closeTweetPanelButton.addActionListener(e -> {
+            textArea1.setText(null);
+            newTweetPanel.setVisible(false);
+
+        });
         scrollPane1.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
             boolean ready = true;
             @Override
@@ -128,6 +133,8 @@ public class TwitterW extends JFrame {
             if (!textArea1.getText().isEmpty())
             {
                 CompletableFuture.supplyAsync(() -> twitterRest.postTweetMessage(textArea1.getText())).thenAccept(TwitterW.this::parseNewTweet);
+                textArea1.setText(null);
+                newTweetPanel.setVisible(false);
             }
         });
         pack();
@@ -147,7 +154,7 @@ public class TwitterW extends JFrame {
     }
 
     private void renderProfileBanner(ImageIcon icon){
-        userProfileBanner.setIcon(new ImageIcon(icon.getImage().getScaledInstance(200, 140, Image.SCALE_SMOOTH)));
+        userProfileBanner.setIcon(new ImageIcon(icon.getImage().getScaledInstance(300, 160, Image.SCALE_SMOOTH)));
     }
     //TODO  : Load timelines and process
     private void loadUserTweetData(){
@@ -213,6 +220,7 @@ public class TwitterW extends JFrame {
         JSONObject obj = new JSONObject(response.getBody());
         userProfileDescription.setText(obj.getString("description"));
         screenName.setText("@" + obj.getString("screen_name"));
+        userName.setText(obj.getString("name"));
         nbFollowsLabel.setText(String.valueOf(obj.getInt("friends_count")));
         nbTweetLabel.setText(String.valueOf(obj.getInt("statuses_count")));
         nbFollowersLabel.setText(String.valueOf(obj.getInt("followers_count")));
