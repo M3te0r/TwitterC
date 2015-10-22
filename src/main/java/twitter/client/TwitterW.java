@@ -9,6 +9,8 @@ import twitter.client.rest.TwitterRest;
 import utils.TaskLoader;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -16,7 +18,6 @@ import java.util.concurrent.CompletableFuture;
  */
 public class TwitterW extends JFrame {
     private JPanel rootPanel;
-    private JButton button1;
     private JPanel leftDockPanel;
     private JButton dismissButton;
     private JPanel newTweetPanel;
@@ -32,25 +33,37 @@ public class TwitterW extends JFrame {
     private JScrollPane scrollPane2;
     private JPanel listContainerPanel;
     private JPanel listPanel;
+    private JButton newTweetButton;
+    private JPanel nbTweetsPanel;
+    private JPanel nbFollowsPanel;
+    private JPanel nbFollowersPanel;
+    private JLabel nbTweetLabel;
+    private JLabel nbFollowsLabel;
+    private JLabel nbFollowersLabel;
     private final TwitterRest twitterRest;
     private TweetListModel model1;
     private TweetListModel model2;
     private final Color DARK1 = new Color(47,47,47);
+    private final Color LIGHT1 = new Color(221,221,211);
 
     public TwitterW(){
         super("Twitter Client");
         twitterRest = new TwitterRest();
+        Toolkit tkMain = Toolkit.getDefaultToolkit();
+        Dimension dimScreenSize = tkMain.getScreenSize();
+        Insets scnMax = tkMain.getScreenInsets(getGraphicsConfiguration());
+        final int taskBarSize = scnMax.bottom;
+        setPreferredSize(new Dimension(dimScreenSize.width, dimScreenSize.height - taskBarSize));
         leftDockPanel.setBorder(new JRoundedCornerBorder());
         scrollPane1.setBorder(new JRoundedCornerBorder());
         scrollPane2.setBorder(new JRoundedCornerBorder());
         JLabel rowLabelHome = new JLabel("Home");
-
         rowLabelHome.setBackground(DARK1);
-        rowLabelHome.setForeground(new Color(221,221,221));
+        rowLabelHome.setForeground(LIGHT1);
         rowLabelHome.setFont(rowLabelHome.getFont().deriveFont(20f));
         JLabel rowLabelUser = new JLabel("User timeline");
         rowLabelUser.setBackground(DARK1);
-        rowLabelUser.setForeground(DARK1);
+        rowLabelUser.setForeground(LIGHT1);
         rowLabelUser.setFont(rowLabelHome.getFont().deriveFont(20f));
         scrollPane2.setColumnHeaderView(rowLabelUser);
         scrollPane1.setColumnHeaderView(rowLabelHome);
@@ -61,9 +74,7 @@ public class TwitterW extends JFrame {
         userProfilePicture.setIcon(new ImageIcon(TwitterW.class.getResource("/icons/blank_pp.png")));
         setIconImage(new ImageIcon(TwitterW.class.getResource("/icons/main_twitterC.png")).getImage());
         setContentPane(rootPanel);
-        pack();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
         model1 = new TweetListModel();
         model2 = new TweetListModel();
         list1.setModel(model1);
@@ -72,11 +83,11 @@ public class TwitterW extends JFrame {
         CellRenderer renderer2 = new CellRenderer();
         list1.setCellRenderer(renderer1);
         list2.setCellRenderer(renderer2);
-        setVisible(true);
         reloadHomeButton.addActionListener(e -> loadUserTweetData());
         reloadTimelineButton.addActionListener(e -> loadHomeTimeline());
-//        button1.addActionListener(e -> newTweetPanel.setVisible(true));
-//        dismissButton.addActionListener(e -> newTweetPanel.setVisible(false));
+        pack();
+        setLocation(dimScreenSize.width - getWidth(), dimScreenSize.height - taskBarSize - getHeight());
+        setVisible(true);
         initGUI();
     }
 
@@ -85,7 +96,7 @@ public class TwitterW extends JFrame {
     }
 
     private void renderProfileBanner(ImageIcon icon){
-        userProfileBanner.setIcon(new ImageIcon(icon.getImage().getScaledInstance(160, 120, Image.SCALE_SMOOTH)));
+        userProfileBanner.setIcon(new ImageIcon(icon.getImage().getScaledInstance(200, 140, Image.SCALE_SMOOTH)));
     }
     //TODO  : Load timelines and process
     private void loadUserTweetData(){
@@ -166,6 +177,9 @@ public class TwitterW extends JFrame {
         JSONObject obj = new JSONObject(response.getBody());
         userProfileDescription.setText(obj.getString("description"));
         screenName.setText("@" + obj.getString("screen_name"));
+        nbFollowsLabel.setText(String.valueOf(obj.getInt("friends_count")));
+        nbTweetLabel.setText(String.valueOf(obj.getInt("statuses_count")));
+        nbFollowersLabel.setText(String.valueOf(obj.getInt("followers_count")));
         CompletableFuture.supplyAsync(() -> TaskLoader.downloadImageFromString(obj.getString("profile_image_url"))).thenAccept(this::renderProfileImage);
         CompletableFuture.supplyAsync(() -> TaskLoader.downloadImageFromString(obj.getString("profile_banner_url"))).thenAccept(this::renderProfileBanner);
     }
@@ -174,5 +188,28 @@ public class TwitterW extends JFrame {
         loadUserInformation();
         loadUserTweetData();
         loadHomeTimeline();
+    }
+
+    private void createUIComponents() {
+        newTweetButton = new JButton("New Tweet")
+        {
+            @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D)g.create();
+                g2.setColor(new Color(43,123,185));
+                g2.fillRect(0,0,getSize().width, getSize().height);
+                g2.dispose();
+                super.paintComponent(g);
+            }
+        };
+        newTweetButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CLicked");
+            }
+        });
+        newTweetButton.setFont(newTweetButton.getFont().deriveFont(20f));
+        newTweetButton.setIcon(new ImageIcon(getClass().getResource("/icons/new_tweet_button2.png")));
+        newTweetButton.setContentAreaFilled(false);
     }
 }

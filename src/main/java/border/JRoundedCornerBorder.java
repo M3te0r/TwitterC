@@ -24,10 +24,11 @@ public class JRoundedCornerBorder extends AbstractBorder {
     public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
         Graphics2D g2 = (Graphics2D)g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        if(c.hasFocus()){
-            g2.setColor(Color.BLUE);
-        }
-        else g2.setColor(Color.BLACK);
+//        if(c.hasFocus()){
+//            g2.setColor(Color.BLUE);
+//        }
+//        else
+        g2.setColor(Color.BLACK);
 
         g2.setStroke(new BasicStroke(thickness, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
         g2.drawRoundRect(thickness, thickness, width - thickness - 2, height - thickness - 2,20,20);

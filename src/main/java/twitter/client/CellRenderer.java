@@ -22,7 +22,7 @@ public class CellRenderer extends JPanel implements ListCellRenderer<TweetModel>
         TweetCellPanel tweetCellPanel = new TweetCellPanel();
         JPanel panel1 = tweetCellPanel.getMainPanel();
         panel1.setOpaque(true);
-        tweetCellPanel.setUserTweet("<html><div style=\\\"width:200px;\\\">" + value.getTweetText().replaceAll("\\n", "<br>") + "</div></html>");
+        tweetCellPanel.setUserTweet(value.getTweetText());
         tweetCellPanel.setUserName(value.getName());
         tweetCellPanel.setUserScreenName('@' + value.getScreenName());
         if (!value.isImageLoaded()){
@@ -35,7 +35,6 @@ public class CellRenderer extends JPanel implements ListCellRenderer<TweetModel>
                 }
             });
         }
-
         else tweetCellPanel.setUserProfilePicture(value.getUserTweetIcon());
         return panel1;
     }

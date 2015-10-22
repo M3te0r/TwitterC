@@ -53,7 +53,6 @@ public class OAuthResource implements Serializable{
         catch (IOException ioex){
             ioex.printStackTrace();
         }
-
     }
 
     public static OAuthResource getInstance(){
