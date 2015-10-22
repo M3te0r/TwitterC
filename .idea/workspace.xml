@@ -7,24 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8e80a6b-352a-417e-8a2d-cd809af6531f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/icons/new_tweet_button2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/icons/new_tweet_icon.png" />
-      <change type="MOVED" beforePath="C:\Users\Mathieu\IdeaProjects\TwitterC\src\main\java\META-INF\MANIFEST.MF" afterPath="$PROJECT_DIR$/src/main/META-INF/MANIFEST.MF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Main.class" afterPath="$PROJECT_DIR$/target/classes/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/twitter/client/OauthRequest.class" afterPath="$PROJECT_DIR$/target/classes/twitter/client/OauthRequest.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/twitter/client/StartupGUI.class" afterPath="$PROJECT_DIR$/target/classes/twitter/client/StartupGUI.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/twitter/client/TwitterW.class" afterPath="$PROJECT_DIR$/target/classes/twitter/client/TwitterW.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/twitter/client/CellRenderer.java" afterPath="$PROJECT_DIR$/src/main/java/twitter/client/CellRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/border/JRoundedCornerBorder.java" afterPath="$PROJECT_DIR$/src/main/java/border/JRoundedCornerBorder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Main.java" afterPath="$PROJECT_DIR$/src/main/java/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/twitter/client/oauth/OAuthResource.java" afterPath="$PROJECT_DIR$/src/main/java/twitter/client/oauth/OAuthResource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/twitter/client/TweetCellPanel.form" afterPath="$PROJECT_DIR$/src/main/java/twitter/client/TweetCellPanel.form" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/twitter/client/TweetCellPanel.java" afterPath="$PROJECT_DIR$/src/main/java/twitter/client/TweetCellPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TwitterC.iml" afterPath="$PROJECT_DIR$/TwitterC.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/TwitterC_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/TwitterC_jar.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/twitter/client/TwitterW.form" afterPath="$PROJECT_DIR$/src/main/java/twitter/client/TwitterW.form" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/twitter/client/TwitterW.java" afterPath="$PROJECT_DIR$/src/main/java/twitter/client/TwitterW.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="TwitterC.iws" />
@@ -53,18 +38,19 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/twitter/client/oauth/OAuthResource.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="80" column="35" selection-start-line="80" selection-start-column="35" selection-end-line="80" selection-end-column="35" />
+              <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2514#2515#0" expanded="true" />
                 <element signature="e#2549#2550#0" expanded="true" />
+                <element signature="e#2586#2587#0" expanded="true" />
                 <element signature="e#2620#2621#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TwitterW.form" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TwitterW.form" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/twitter/client/TwitterW.form">
           <provider selected="true" editor-type-id="ui-designer">
             <state />
@@ -75,11 +61,11 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/twitter/client/TwitterW.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="86" column="72" selection-start-line="86" selection-start-column="72" selection-end-line="86" selection-end-column="72" />
+              <caret line="207" column="47" selection-start-line="207" selection-start-column="47" selection-end-line="207" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#9443#9444#0" expanded="true" />
-                <element signature="e#9504#9505#0" expanded="true" />
+                <element signature="e#9456#9457#0" expanded="true" />
+                <element signature="e#9518#9519#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -165,10 +151,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MANIFEST.MF" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MANIFEST.MF" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/META-INF/MANIFEST.MF">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.085">
+            <state vertical-scroll-proportion="0.0">
               <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
@@ -219,7 +205,6 @@
         <option value="$PROJECT_DIR$/src/main/java/border/JRoundedCornerBorder.java" />
         <option value="$PROJECT_DIR$/src/main/java/twitter/client/TweetCellPanel.java" />
         <option value="$PROJECT_DIR$/src/main/java/twitter/client/TweetCellPanel.form" />
-        <option value="$PROJECT_DIR$/src/main/java/twitter/client/oauth/OAuthResource.java" />
         <option value="$PROJECT_DIR$/src/main/java/TwitterClientMainGUI.java" />
         <option value="$PROJECT_DIR$/src/main/java/twitter/client/TwitterClientMain.java" />
         <option value="$PROJECT_DIR$/src/main/java/twitter/client/TwitterClientMain.form" />
@@ -228,9 +213,10 @@
         <option value="$PROJECT_DIR$/src/main/java/twitter/client/OauthRequest.java" />
         <option value="$PROJECT_DIR$/src/main/java/twitter/client/CellRenderer.java" />
         <option value="$PROJECT_DIR$/src/main/java/utils/SharedPreferences.java" />
-        <option value="$PROJECT_DIR$/src/main/java/twitter/client/TwitterW.form" />
-        <option value="$PROJECT_DIR$/src/main/java/twitter/client/TwitterW.java" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/twitter/client/oauth/OAuthResource.java" />
+        <option value="$PROJECT_DIR$/src/main/java/twitter/client/TwitterW.java" />
+        <option value="$PROJECT_DIR$/src/main/java/twitter/client/TwitterW.form" />
       </list>
     </option>
   </component>
@@ -378,6 +364,166 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterW" />
+              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="oauth" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="border" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TwitterC" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value=".idea" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -441,7 +587,7 @@
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="467" />
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="225" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="FullScreen" value="false" />
   </component>
@@ -1071,7 +1217,7 @@
       <workItem from="1445255502219" duration="9935000" />
       <workItem from="1445293435760" duration="5329000" />
       <workItem from="1445375055979" duration="6031000" />
-      <workItem from="1445449426186" duration="22277000" />
+      <workItem from="1445449426186" duration="22656000" />
     </task>
     <task id="LOCAL-00001" summary="- Removed Oauth URLs, not used directly -&gt; Scribe lib&#10;- Removed unused Jersey libs">
       <created>1442774710899</created>
@@ -1151,11 +1297,17 @@
       <option name="project" value="LOCAL" />
       <updated>1445299536177</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="UI update : fixed the whole GUI in general&#10;color updates, custom paint for button">
+      <created>1445473234445</created>
+      <option name="number" value="00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1445473234445</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="224546000" />
+    <option name="totallyTimeSpent" value="224925000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1254,7 +1406,8 @@
     <MESSAGE value="Formatted user screen name and custom name" />
     <MESSAGE value="Handle retweeted tweets from friends" />
     <MESSAGE value="UI update&#10;tweet text are correctly rendered and displayed&#10;JTextArea to JLabel with html&#10;scroll pane headers to identify section" />
-    <option name="LAST_COMMIT_MESSAGE" value="UI update&#10;tweet text are correctly rendered and displayed&#10;JTextArea to JLabel with html&#10;scroll pane headers to identify section" />
+    <MESSAGE value="UI update : fixed the whole GUI in general&#10;color updates, custom paint for button" />
+    <option name="LAST_COMMIT_MESSAGE" value="UI update : fixed the whole GUI in general&#10;color updates, custom paint for button" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1574,11 +1727,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/twitter/client/TwitterW.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/twitter/client/TweetCellPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1607,18 +1755,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/twitter/client/TwitterW.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="86" column="72" selection-start-line="86" selection-start-column="72" selection-end-line="86" selection-end-column="72" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#9443#9444#0" expanded="true" />
-            <element signature="e#9504#9505#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/model/TweetListModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1637,19 +1773,6 @@
             <element signature="imports" expanded="true" />
             <element signature="e#1074#1075#0" expanded="true" />
             <element signature="e#1148#1149#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/twitter/client/oauth/OAuthResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="80" column="35" selection-start-line="80" selection-start-column="35" selection-end-line="80" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2514#2515#0" expanded="true" />
-            <element signature="e#2549#2550#0" expanded="true" />
-            <element signature="e#2620#2621#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1674,10 +1797,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/META-INF/MANIFEST.MF">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.085">
+        <state vertical-scroll-proportion="0.0">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/twitter/client/oauth/OAuthResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2514#2515#0" expanded="true" />
+            <element signature="e#2549#2550#0" expanded="true" />
+            <element signature="e#2586#2587#0" expanded="true" />
+            <element signature="e#2620#2621#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/twitter/client/TwitterW.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="207" column="47" selection-start-line="207" selection-start-column="47" selection-end-line="207" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#9456#9457#0" expanded="true" />
+            <element signature="e#9518#9519#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/twitter/client/TwitterW.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
       </provider>
     </entry>
   </component>

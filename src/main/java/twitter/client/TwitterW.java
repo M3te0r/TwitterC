@@ -197,7 +197,7 @@ public class TwitterW extends JFrame {
             protected void paintComponent(Graphics g) {
                 Graphics2D g2 = (Graphics2D)g.create();
                 g2.setColor(new Color(43,123,185));
-                g2.fillRect(0,0,getSize().width, getSize().height);
+                g2.fillRoundRect(0, 0, getSize().width, getSize().height, 7, 7);
                 g2.dispose();
                 super.paintComponent(g);
             }
@@ -205,7 +205,7 @@ public class TwitterW extends JFrame {
         newTweetButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("CLicked");
+                newTweetPanel.setVisible(true);
             }
         });
         newTweetButton.setFont(newTweetButton.getFont().deriveFont(20f));
