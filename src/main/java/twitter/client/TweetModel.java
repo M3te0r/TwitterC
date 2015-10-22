@@ -9,14 +9,19 @@ import java.util.Date;
  */
 public class TweetModel implements Comparable<TweetModel>{
 
-    private final String screenName;
-    private final String name;
-    private final String tweetText;
-    private final String userURLProfilIcon;
+    private String screenName;
+    private String name;
+    private String tweetText;
+    private String userURLProfilIcon;
     private ImageIcon userTweetIcon;
     private boolean imageLoaded;
     private long internalId;
     private Date createdAt;
+
+    public TweetModel()
+    {
+
+    }
 
     public TweetModel(String tweetText, String userURLProfileIcon, String screenName, String name,long internalId, String formattedDate) {
         this.tweetText = tweetText;

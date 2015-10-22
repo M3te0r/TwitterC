@@ -15,27 +15,40 @@ public class TwitterRest {
     private static final String ACCOUNT_VERIF = "account/verify_credentials.json";
     private static final String USER_TIMELINE = "statuses/user_timeline.json";
     private static final String HOME_TIMELINE ="statuses/home_timeline.json";
-    private static final String POST_STATUS = "statuses/update";
+    private static final String POST_STATUS = "statuses/update.json";
 
     public TwitterRest(){
         this.authResource = OAuthResource.getInstance();
     }
 
-    public Response getHomeTimeline(@Nullable Long idToLoad, @Nullable Long idMax){
+    public String getHomeTimeline(@Nullable Long idToLoad, @Nullable Long idMax){
         if (idToLoad != null){
-            return authResource.makeGETRequest(HOME_TIMELINE, new HashMap<String, String>(){{put("count", "300"); put("since_id", idToLoad.toString());}});
+            return authResource.makeGETRequest(HOME_TIMELINE, new HashMap<String, String>(){{put("count", "300"); put("since_id", idToLoad.toString());}}).getBody();
         }
         else if (idMax != null){
-            return authResource.makeGETRequest(HOME_TIMELINE, new HashMap<String, String>(){{put("count", "300"); put("max_id", idMax.toString());}});
+            return authResource.makeGETRequest(HOME_TIMELINE, new HashMap<String, String>(){{put("count", "300"); put("max_id", idMax.toString());}}).getBody();
         }
-        else return authResource.makeGETRequest(HOME_TIMELINE, new HashMap<String, String>(){{put("count", "300");}});
+        else return authResource.makeGETRequest(HOME_TIMELINE, new HashMap<String, String>(){{put("count", "300");}}).getBody();
     }
 
-    public Response getUserTweets(@Nullable Long idToLoad, @Nullable Long idMax){
+    public String getUserTweets(@Nullable Long idToLoad, @Nullable Long idMax){
         if(idToLoad != null){
-            return authResource.makeGETRequest(USER_TIMELINE, new HashMap<String, String>(){{put("count", "300"); put("since_id", idToLoad.toString());}});
+            return authResource.makeGETRequest(USER_TIMELINE, new HashMap<String, String>(){{put("count", "300"); put("since_id", idToLoad.toString());}}).getBody();
         }
-        return authResource.makeGETRequest(USER_TIMELINE, new HashMap<String, String>(){{put("count", "300");}});
+        return authResource.makeGETRequest(USER_TIMELINE, new HashMap<String, String>(){{put("count", "300");}}).getBody();
+    }
+
+    public String postTweetMessage(String tweetMessage){
+        Response response = authResource.makePOSTRequest(POST_STATUS, new HashMap<String, String>(){{put("status", tweetMessage);}});
+        if (response.getCode() == 200){
+            System.out.println("200 OK Returning string");
+            return response.getBody();
+        }
+        else
+        {
+            System.out.println("ERROR GOT CODE " + response.getCode());
+            return null;
+        }
     }
 
     public Response getUserInformationsUponAuth()

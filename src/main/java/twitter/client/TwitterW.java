@@ -7,10 +7,15 @@ import org.json.JSONObject;
 import org.scribe.model.Response;
 import twitter.client.rest.TwitterRest;
 import utils.TaskLoader;
+import utils.TweetParser;
+
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -40,11 +45,16 @@ public class TwitterW extends JFrame {
     private JLabel nbTweetLabel;
     private JLabel nbFollowsLabel;
     private JLabel nbFollowersLabel;
+    private JButton closeTweetPanelButton;
+    private JTextArea textArea1;
+    private JButton tweetButton;
+    private JLabel nbCharTweet;
     private final TwitterRest twitterRest;
     private TweetListModel model1;
     private TweetListModel model2;
     private final Color DARK1 = new Color(47,47,47);
     private final Color LIGHT1 = new Color(221,221,211);
+    private final int NBMAXCHARTWEET = 140;
 
     public TwitterW(){
         super("Twitter Client");
@@ -85,10 +95,24 @@ public class TwitterW extends JFrame {
         list2.setCellRenderer(renderer2);
         reloadHomeButton.addActionListener(e -> loadUserTweetData());
         reloadTimelineButton.addActionListener(e -> loadHomeTimeline());
+        closeTweetPanelButton.addActionListener(e -> newTweetPanel.setVisible(false));
+
+        tweetButton.addActionListener(e -> {
+            if (!textArea1.getText().isEmpty())
+            {
+                CompletableFuture.supplyAsync(() -> twitterRest.postTweetMessage(textArea1.getText())).thenAccept(TwitterW.this::parseNewTweet);
+            }
+        });
         pack();
         setLocation(dimScreenSize.width - getWidth(), dimScreenSize.height - taskBarSize - getHeight());
         setVisible(true);
         initGUI();
+    }
+
+    private void parseNewTweet(String tweetResult){
+        if (tweetResult != null){
+            runInvokeLater(TweetParser.parseSingle(tweetResult), 2);
+        }
     }
 
     private void renderProfileImage(ImageIcon icon){
@@ -125,41 +149,26 @@ public class TwitterW extends JFrame {
         reloadTimelineButton.setText("Reload timeline");
     }
 
-    private void processTimeline(Response response, int list){
-        JSONArray array = new JSONArray(response.getBody());
-        for (int i = 0; i < array.length(); i++){
-            JSONObject object = array.getJSONObject(i);
-            if (object.getBoolean("retweeted")){
-                JSONObject rted = object.getJSONObject("retweeted_status");
-                String rtedText = rted.getString("text");
-                JSONObject user = rted.getJSONObject("user");
-                String userProfileURL = user.getString("profile_image_url_https");
-                String screenName = user.getString("screen_name");
-                String userName = user.getString("name");
-                TweetModel tweetModel = new TweetModel(rtedText, userProfileURL, screenName, userName, object.getLong("id"), rted.getString("created_at"));
-                runInvokeLater(tweetModel, list);
-            }
-            else if (object.has("retweeted_status")){
-                JSONObject rted = object.getJSONObject("retweeted_status");
-                String rtedText = rted.getString("text");
-                JSONObject user = rted.getJSONObject("user");
-                String userProfileURL = user.getString("profile_image_url_https");
-                String screenName = user.getString("screen_name");
-                String userName = user.getString("name");
-                TweetModel tweetModel = new TweetModel(rtedText, userProfileURL, screenName, userName, object.getLong("id"), rted.getString("created_at"));
-                runInvokeLater(tweetModel, list);
-            }
-            else {
-                JSONObject userObject = object.getJSONObject("user");
-                String urlProfilePicture = userObject.getString("profile_image_url_https");
-                String twee = object.getString("text");
-                String userScreenName = userObject.getString("screen_name");
-                String userName = userObject.getString("name");
-                TweetModel tweetModel = new TweetModel(twee, urlProfilePicture, userScreenName, userName, object.getLong("id"), object.getString("created_at"));
-                runInvokeLater(tweetModel, list);
-            }
-        }
+    private void processTimeline(String response, int list){
+        runInvokeLater(TweetParser.parseMultiple(response), list);
         enableButton();
+    }
+
+    private void runInvokeLater(java.util.List<TweetModel> tweets, int list){
+        if(tweets != null){
+            SwingUtilities.invokeLater(() -> {
+                switch (list) {
+                    case 1:
+                        tweets.forEach(model1::addElement);
+                        model1.sortModel();
+                        break;
+                    default:
+                        tweets.forEach(model2::addElement);
+                        model2.sortModel();
+                        break;
+                }
+            });
+        }
     }
 
     private void runInvokeLater(TweetModel tweetModel, int list){
@@ -211,5 +220,55 @@ public class TwitterW extends JFrame {
         newTweetButton.setFont(newTweetButton.getFont().deriveFont(20f));
         newTweetButton.setIcon(new ImageIcon(getClass().getResource("/icons/new_tweet_button2.png")));
         newTweetButton.setContentAreaFilled(false);
+
+
+        textArea1 = new JTextArea(){
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                if(getText().isEmpty() && !(FocusManager.getCurrentKeyboardFocusManager().getFocusOwner() == this))
+                {
+                    Graphics2D g2 = (Graphics2D)g.create();
+                    g2.setBackground(Color.GRAY);
+                    g2.setColor(Color.GRAY);
+                    g2.setFont(UIManager.getFont("Label.font").deriveFont(20f));
+                    g2.drawString("Quoi de neuf ?",8,20);
+                    g2.dispose();
+                }
+            }
+        };
+
+        textArea1.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                int nbchar = NBMAXCHARTWEET - e.getDocument().getLength();
+                nbCharTweet.setText(String.valueOf(nbchar));
+                if (nbchar >= 0 && nbchar < 140){
+                    tweetButton.setEnabled(true);
+                }
+                else tweetButton.setEnabled(false);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                int nbchar = NBMAXCHARTWEET - e.getDocument().getLength();
+                nbCharTweet.setText(String.valueOf(nbchar));
+                if (nbchar >= 0 && nbchar < 140){
+                    tweetButton.setEnabled(true);
+                }
+                else tweetButton.setEnabled(false);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                int nbchar = NBMAXCHARTWEET - e.getDocument().getLength();
+                nbCharTweet.setText(String.valueOf(nbchar));
+                if (nbchar >= 0 && nbchar < 140){
+                    tweetButton.setEnabled(true);
+                }
+                else tweetButton.setEnabled(false);
+            }
+        });
+        textArea1.setFont(UIManager.getFont("Label.font").deriveFont(20f));
     }
 }
