@@ -48,6 +48,8 @@ public class TwitterW extends JFrame {
     private JTextArea textArea1;
     private JButton tweetButton;
     private JLabel nbCharTweet;
+    private JLabel loading1;
+    private JLabel loading2;
     private final TwitterRest twitterRest;
     private final TweetListModel model1;
     private final TweetListModel model2;
@@ -102,7 +104,9 @@ public class TwitterW extends JFrame {
                 if (list1.getLastVisibleIndex() <= model1.size() && list1.getLastVisibleIndex() >= model1.size() - 15 && ready)
                 {
                     ready = false;
-                    CompletableFuture.supplyAsync(() -> twitterRest.getHomeTimeline(null, model1.lastElement().getInternalId())).thenAccept(a -> processTimeline(a, 1)).handle((ok, err) -> ready = true);
+                    loading1.setVisible(true);
+                    CompletableFuture.supplyAsync(() -> twitterRest.getHomeTimeline(null, model1.lastElement().getInternalId())).thenAccept(a -> processTimeline(a, 1)).handle((ok, err) -> {ready = true;
+                    loading1.setVisible(false); return ok;});
                 }
             }
         });
@@ -114,7 +118,9 @@ public class TwitterW extends JFrame {
                 if (list2.getLastVisibleIndex() <= model2.getSize() && list2.getLastVisibleIndex() >= model2.getSize() - 15 && ready)
                 {
                     ready = false;
-                    CompletableFuture.supplyAsync(() -> twitterRest.getUserTweets(null, model2.lastElement().getInternalId())).thenAccept(a -> processTimeline(a, 2)).handle((ok, err) -> ready = true);
+                    loading2.setVisible(true);
+                    CompletableFuture.supplyAsync(() -> twitterRest.getUserTweets(null, model2.lastElement().getInternalId())).thenAccept(a -> processTimeline(a, 2)).handle((ok, err) -> {ready = true;
+                    loading2.setVisible(false); return ok;});
                 }
             }
         });
