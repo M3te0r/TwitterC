@@ -23,19 +23,23 @@ public class TwitterRest {
 
     public String getHomeTimeline(@Nullable Long idToLoad, @Nullable Long idMax){
         if (idToLoad != null){
-            return authResource.makeGETRequest(HOME_TIMELINE, new HashMap<String, String>(){{put("count", "300"); put("since_id", idToLoad.toString());}}).getBody();
+            return authResource.makeGETRequest(HOME_TIMELINE, new HashMap<String, String>(){{put("count", "100"); put("since_id", idToLoad.toString());}}).getBody();
         }
         else if (idMax != null){
-            return authResource.makeGETRequest(HOME_TIMELINE, new HashMap<String, String>(){{put("count", "300"); put("max_id", idMax.toString());}}).getBody();
+            return authResource.makeGETRequest(HOME_TIMELINE, new HashMap<String, String>(){{put("count", "100"); put("max_id", String.valueOf(idMax - 1));}}).getBody();
         }
-        else return authResource.makeGETRequest(HOME_TIMELINE, new HashMap<String, String>(){{put("count", "300");}}).getBody();
+        return authResource.makeGETRequest(HOME_TIMELINE, new HashMap<String, String>(){{put("count", "100");}}).getBody();
     }
 
     public String getUserTweets(@Nullable Long idToLoad, @Nullable Long idMax){
         if(idToLoad != null){
-            return authResource.makeGETRequest(USER_TIMELINE, new HashMap<String, String>(){{put("count", "300"); put("since_id", idToLoad.toString());}}).getBody();
+            return authResource.makeGETRequest(USER_TIMELINE, new HashMap<String, String>(){{put("count", "100"); put("since_id", idToLoad.toString());}}).getBody();
         }
-        return authResource.makeGETRequest(USER_TIMELINE, new HashMap<String, String>(){{put("count", "300");}}).getBody();
+        else if (idMax != null)
+        {
+            return authResource.makeGETRequest(USER_TIMELINE, new HashMap<String, String>(){{put("count", "100"); put("max_id", String.valueOf(idMax - 1));}}).getBody();
+        }
+        return authResource.makeGETRequest(USER_TIMELINE, new HashMap<String, String>(){{put("count", "100");}}).getBody();
     }
 
     public String postTweetMessage(String tweetMessage){

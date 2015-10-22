@@ -46,6 +46,8 @@ public class TwitterW extends JFrame {
     private JTextArea textArea1;
     private JButton tweetButton;
     private JLabel nbCharTweet;
+    private JButton loadMoare1;
+    private JButton loadMoare2;
     private final TwitterRest twitterRest;
     private final TweetListModel model1;
     private final TweetListModel model2;
@@ -100,6 +102,8 @@ public class TwitterW extends JFrame {
                 CompletableFuture.supplyAsync(() -> twitterRest.postTweetMessage(textArea1.getText())).thenAccept(TwitterW.this::parseNewTweet);
             }
         });
+        loadMoare1.addActionListener(e -> CompletableFuture.supplyAsync(() -> twitterRest.getHomeTimeline(null, model1.lastElement().getInternalId())).thenAccept(a -> processTimeline(a, 1)));
+        loadMoare2.addActionListener(e -> CompletableFuture.supplyAsync(() -> twitterRest.getUserTweets(null, model2.lastElement().getInternalId())).thenAccept(a -> processTimeline(a, 2)));
         pack();
         setLocation(dimScreenSize.width - getWidth(), dimScreenSize.height - taskBarSize - getHeight());
         setVisible(true);

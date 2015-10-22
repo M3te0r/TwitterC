@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="twitter.client.TwitterW">
   <grid id="27dc6" binding="rootPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
     <constraints>
-      <xy x="20" y="20" width="1057" height="427"/>
+      <xy x="20" y="20" width="1071" height="427"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -331,7 +331,8 @@
         </properties>
         <border type="none"/>
         <children>
-          <grid id="e7240" binding="listPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+          <grid id="e7240" binding="listPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -341,7 +342,9 @@
             <border type="none"/>
             <children>
               <scrollpane id="eb04b" binding="scrollPane1">
-                <constraints border-constraint="Center"/>
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
                 <properties>
                   <background color="-13684945"/>
                   <foreground color="-4473925"/>
@@ -360,9 +363,18 @@
                   </component>
                 </children>
               </scrollpane>
+              <component id="49623" class="javax.swing.JButton" binding="loadMoare1">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Charger plus de tweets"/>
+                </properties>
+              </component>
             </children>
           </grid>
-          <grid id="53702" layout-manager="BorderLayout" hgap="0" vgap="0">
+          <grid id="53702" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -372,7 +384,9 @@
             <border type="none"/>
             <children>
               <scrollpane id="b9c2" binding="scrollPane2">
-                <constraints border-constraint="Center"/>
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
                 <properties>
                   <background color="-13684945"/>
                   <horizontalScrollBarPolicy value="31"/>
@@ -390,6 +404,14 @@
                   </component>
                 </children>
               </scrollpane>
+              <component id="94def" class="javax.swing.JButton" binding="loadMoare2">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Charger plus de tweets"/>
+                </properties>
+              </component>
             </children>
           </grid>
         </children>
