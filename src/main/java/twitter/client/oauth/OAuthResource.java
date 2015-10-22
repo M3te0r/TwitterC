@@ -22,7 +22,7 @@ public class OAuthResource implements Serializable{
 
     private static final String REST_API_URL = "https://api.twitter.com/1.1/";
     private static class SingletonHandler{
-        private static final OAuthResource instance = new OAuthResource();
+    private static final OAuthResource instance = new OAuthResource();
     }
 
     public boolean areTokenSet(){

@@ -22,13 +22,13 @@ public class CellRenderer extends JPanel implements ListCellRenderer<TweetModel>
         TweetCellPanel tweetCellPanel = new TweetCellPanel();
         JPanel panel1 = tweetCellPanel.getMainPanel();
         panel1.setOpaque(true);
-        tweetCellPanel.setUserTweet(value.getTweetText());
+        tweetCellPanel.setUserTweet("<html><div style=\\\"width:300px;\\\">" + value.getTweetText().replaceAll("\\n", "<br>") + "</div></html>");
         tweetCellPanel.setUserName(value.getName());
         tweetCellPanel.setUserScreenName('@' + value.getScreenName());
         if (!value.isImageLoaded()){
             CompletableFuture.supplyAsync(() -> TaskLoader.downloadImageFromString(value.getUserURLProfilIcon())).thenAccept(a -> {
                 if (a != null) {
-                    value.setImageLoaded(true);
+                    value.setImageLoaded();
                     value.setUserTweetIcon(a);
                     tweetCellPanel.setUserProfilePicture(a);
                     ((DefaultListModel<TweetModel>) list.getModel()).setElementAt(value, index);

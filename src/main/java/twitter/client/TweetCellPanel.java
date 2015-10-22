@@ -1,10 +1,5 @@
 package twitter.client;
-
-
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class TweetCellPanel {
     private JLabel UserProfilePicture;
@@ -12,15 +7,10 @@ public class TweetCellPanel {
     private JLabel userName;
     private JLabel userScreenName;
     private JPanel mainPanel;
-    private JTextArea userTweet;
-    private final Font font = UIManager.getFont("Label.font").deriveFont(14f);
+    private JLabel userTweet;
 
     public TweetCellPanel(){
-        userTweet.setBorder(null);
-        userTweet.setFont(font);
-        userTweet.setEditable(false);
-        userTweet.requestFocusInWindow();
-        userTweet.setMinimumSize(new Dimension(((int) userTweet.getPreferredSize().getWidth()) + 1, ((int) userTweet.getPreferredSize().getHeight())));
+        userTweet.setFont(userTweet.getFont().deriveFont(14f));
         UserProfilePicture.setIcon(new ImageIcon(getClass().getResource("/icons/blank_pp.png")));
     }
 

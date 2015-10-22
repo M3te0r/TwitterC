@@ -69,8 +69,8 @@ public class TweetModel implements Comparable<TweetModel>{
         return imageLoaded;
     }
 
-    public void setImageLoaded(boolean imageLoaded) {
-        this.imageLoaded = imageLoaded;
+    public void setImageLoaded() {
+        this.imageLoaded = true;
     }
 
     @Override

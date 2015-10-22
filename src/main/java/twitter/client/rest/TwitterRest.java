@@ -40,15 +40,7 @@ public class TwitterRest {
 
     public String postTweetMessage(String tweetMessage){
         Response response = authResource.makePOSTRequest(POST_STATUS, new HashMap<String, String>(){{put("status", tweetMessage);}});
-        if (response.getCode() == 200){
-            System.out.println("200 OK Returning string");
-            return response.getBody();
-        }
-        else
-        {
-            System.out.println("ERROR GOT CODE " + response.getCode());
-            return null;
-        }
+        return response.getCode() == 200 ? response.getBody() : null;
     }
 
     public Response getUserInformationsUponAuth()

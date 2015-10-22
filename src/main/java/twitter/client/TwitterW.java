@@ -2,7 +2,6 @@ package twitter.client;
 
 import border.JRoundedCornerBorder;
 import model.TweetListModel;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.scribe.model.Response;
 import twitter.client.rest.TwitterRest;
@@ -15,7 +14,6 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -24,7 +22,6 @@ import java.util.concurrent.CompletableFuture;
 public class TwitterW extends JFrame {
     private JPanel rootPanel;
     private JPanel leftDockPanel;
-    private JButton dismissButton;
     private JPanel newTweetPanel;
     private JLabel userProfilePicture;
     private JLabel userProfileBanner;
@@ -50,8 +47,8 @@ public class TwitterW extends JFrame {
     private JButton tweetButton;
     private JLabel nbCharTweet;
     private final TwitterRest twitterRest;
-    private TweetListModel model1;
-    private TweetListModel model2;
+    private final TweetListModel model1;
+    private final TweetListModel model2;
     private final Color DARK1 = new Color(47,47,47);
     private final Color LIGHT1 = new Color(221,221,211);
     private final int NBMAXCHARTWEET = 140;

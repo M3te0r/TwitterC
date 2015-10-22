@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="twitter.client.TweetCellPanel">
-  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="4" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
-      <xy x="20" y="20" width="592" height="400"/>
+      <xy x="20" y="20" width="160" height="95"/>
     </constraints>
     <properties>
       <background color="-14539228"/>
@@ -12,16 +12,15 @@
     <children>
       <component id="d5ebb" class="javax.swing.JLabel" binding="UserProfilePicture">
         <constraints>
-          <grid row="0" column="0" row-span="4" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value=""/>
         </properties>
       </component>
-      <grid id="7b7f7" binding="userNamesPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-        <margin top="0" left="0" bottom="0" right="0"/>
+      <grid id="7b7f7" binding="userNamesPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
         <constraints>
-          <grid row="0" column="1" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <background color="-14539228"/>
@@ -29,9 +28,7 @@
         <border type="none"/>
         <children>
           <component id="e6672" class="javax.swing.JLabel" binding="userName">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
+            <constraints/>
             <properties>
               <font size="16" style="1"/>
               <foreground color="-3355444"/>
@@ -39,9 +36,7 @@
             </properties>
           </component>
           <component id="a747e" class="javax.swing.JLabel" binding="userScreenName">
-            <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
+            <constraints/>
             <properties>
               <background color="-14539228"/>
               <font size="12"/>
@@ -51,34 +46,26 @@
           </component>
         </children>
       </grid>
-      <grid id="66b09" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="275a0" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <autoscrolls value="false"/>
-          <background color="-14539228"/>
-          <doubleBuffered value="true"/>
-          <enabled value="true"/>
+          <background color="-14539229"/>
         </properties>
         <border type="none"/>
         <children>
-          <component id="c452d" class="javax.swing.JTextArea" binding="userTweet">
+          <component id="ced62" class="javax.swing.JLabel" binding="userTweet">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <autoscrolls value="false"/>
               <background color="-14539228"/>
-              <caretPosition value="0"/>
-              <editable value="false"/>
               <enabled value="true"/>
-              <focusCycleRoot value="false"/>
-              <focusTraversalPolicyProvider value="false"/>
               <foreground color="-2236963"/>
-              <lineWrap value="true"/>
-              <tabSize value="8"/>
-              <wrapStyleWord value="true"/>
+              <text value=""/>
             </properties>
           </component>
         </children>

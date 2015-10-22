@@ -2,10 +2,7 @@ package utils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.scribe.model.Response;
 import twitter.client.TweetModel;
-
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +18,7 @@ public class TweetParser {
     public static List<TweetModel> parseMultiple(String response){
         if(response != null){
             JSONArray array = new JSONArray(response);
-            if (array != null && array.length() > 0)
+            if (array.length() > 0)
             {
                 List<TweetModel> tweets = new ArrayList<>();
                 for (int i = 0; i < array.length(); i++)
