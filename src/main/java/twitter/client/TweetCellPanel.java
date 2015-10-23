@@ -10,6 +10,7 @@ public class TweetCellPanel {
     private JLabel userTweet;
     private JLabel retweetCountLabel;
     private JLabel favoriteCountLabel;
+    private JLabel retweetedByLabel;
 
     public TweetCellPanel(){
         userTweet.setFont(userTweet.getFont().deriveFont(14f));
@@ -43,5 +44,10 @@ public class TweetCellPanel {
 
     public void setUserScreenName(String userScreenName){
         this.userScreenName.setText(userScreenName);
+    }
+
+    public void setRetweetedByLabel(String user){
+        retweetedByLabel.setVisible(true);
+        retweetedByLabel.setText("Retweeted by " + user);
     }
 }

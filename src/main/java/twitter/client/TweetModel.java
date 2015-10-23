@@ -1,5 +1,6 @@
 package twitter.client;
 
+import com.sun.istack.internal.Nullable;
 import utils.DateUtils;
 import javax.swing.*;
 import java.util.Date;
@@ -19,13 +20,22 @@ public class TweetModel implements Comparable<TweetModel>{
     private Date createdAt;
     private int favoriteCount;
     private int retweetCount;
+    private String retweetedBy;
 
     public TweetModel()
     {
 
     }
 
-    public TweetModel(String tweetText, String userURLProfileIcon, String screenName, String name,long internalId, String formattedDate, int rt, int fav) {
+    public TweetModel(String tweetText,
+                      String userURLProfileIcon,
+                      String screenName,
+                      String name,
+                      long internalId,
+                      String formattedDate,
+                      int rt,
+                      int fav,
+                      String retweetedBy) {
         this.tweetText = tweetText;
         this.screenName = screenName;
         this.name = name;
@@ -35,6 +45,11 @@ public class TweetModel implements Comparable<TweetModel>{
         this.createdAt = DateUtils.getTwitterDate(formattedDate);
         this.retweetCount = rt;
         this.favoriteCount = fav;
+        this.retweetedBy = retweetedBy;
+    }
+
+    public String getRetweetedBy() {
+        return retweetedBy;
     }
 
     public String getName() {
