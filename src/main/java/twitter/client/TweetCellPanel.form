@@ -89,6 +89,7 @@
           <component id="95462" class="javax.swing.JLabel" binding="retweetCountLabel">
             <constraints/>
             <properties>
+              <foreground color="-6710887"/>
               <text value=""/>
             </properties>
           </component>
@@ -102,6 +103,7 @@
           <component id="646f6" class="javax.swing.JLabel" binding="favoriteCountLabel">
             <constraints/>
             <properties>
+              <foreground color="-6710887"/>
               <text value=""/>
             </properties>
           </component>
