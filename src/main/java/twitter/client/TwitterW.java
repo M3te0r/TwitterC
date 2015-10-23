@@ -143,10 +143,7 @@ public class TwitterW extends JFrame {
 
     private void parseNewTweet(String tweetResult){
         if (tweetResult != null){
-            TweetModel m = TweetParser.parseSingle(tweetResult);
-            runInvokeLater(m, 1);
-            runInvokeLater(m, 2);
-
+            runInvokeLater(TweetParser.parseSingle(tweetResult), 2);
         }
     }
 
@@ -159,34 +156,33 @@ public class TwitterW extends JFrame {
     }
     //TODO  : Load timelines and process
     private void loadUserTweetData(){
+        reloadHomeButton.setEnabled(false);
+        CompletableFuture future;
         if (model1.isEmpty())
         {
-            CompletableFuture.supplyAsync(() -> twitterRest.getUserTweets(null, null)).thenAccept(a -> this.processTimeline(a, 2));
+            future = CompletableFuture.supplyAsync(() -> twitterRest.getUserTweets(null, null)).thenAccept(a -> this.processTimeline(a, 2));
         }
         else {
-            CompletableFuture.supplyAsync(() -> twitterRest.getUserTweets(model2.getMaxId(), null)).thenAccept(a -> this.processTimeline(a, 2));
+            future = CompletableFuture.supplyAsync(() -> twitterRest.getUserTweets(model2.getMaxId(), null)).thenAccept(a -> this.processTimeline(a, 2));
         }
+        future.handle((ok, err) -> {reloadHomeButton.setEnabled(true); return ok;});
     }
 
     private void loadHomeTimeline(){
         reloadTimelineButton.setEnabled(false);
-        reloadTimelineButton.setText("In Progress...");
+        CompletableFuture future;
         if (model2.isEmpty()){
-            CompletableFuture.supplyAsync(() -> twitterRest.getHomeTimeline(null, null)).thenAccept(a -> this.processTimeline(a, 1));
+            future = CompletableFuture.supplyAsync(() -> twitterRest.getHomeTimeline(null, null)).thenAccept(a -> this.processTimeline(a, 1));
         }
         else {
-            CompletableFuture.supplyAsync(() -> twitterRest.getHomeTimeline(model1.getMaxId(), null)).thenAccept(a -> this.processTimeline(a, 1));
+            future = CompletableFuture.supplyAsync(() -> twitterRest.getHomeTimeline(model1.getMaxId(), null)).thenAccept(a -> this.processTimeline(a, 1));
         }
-    }
+        future.handle((ok, err) -> {reloadTimelineButton.setEnabled(true); return ok;});
 
-    public void enableButton(){
-        reloadTimelineButton.setEnabled(true);
-        reloadTimelineButton.setText("Reload timeline");
     }
 
     private void processTimeline(String response, int list){
         runInvokeLater(TweetParser.parseMultiple(response), list);
-        enableButton();
     }
 
     private void runInvokeLater(java.util.List<TweetModel> tweets, int list){
@@ -231,8 +227,12 @@ public class TwitterW extends JFrame {
 
     private void initGUI(){
         loadUserInformation();
+        reloadHomeButton.setEnabled(false);
+        reloadTimelineButton.setEnabled(false);
         loadUserTweetData();
         loadHomeTimeline();
+        reloadHomeButton.setEnabled(true);
+        reloadTimelineButton.setEnabled(true);
     }
 
     private void createUIComponents() {
