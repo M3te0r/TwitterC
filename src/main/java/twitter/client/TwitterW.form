@@ -66,14 +66,13 @@
                 <children>
                   <component id="c169c" class="javax.swing.JTextArea" binding="userProfileDescription">
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="1" fill="1" indent="0" use-parent-layout="false">
-                        <preferred-size width="150" height="50"/>
-                      </grid>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <background color="-5789785"/>
                       <editable value="false"/>
                       <enabled value="true"/>
+                      <font size="14"/>
                       <lineWrap value="true"/>
                       <text value=""/>
                       <wrapStyleWord value="false"/>
@@ -107,7 +106,7 @@
                       </component>
                       <component id="2f1b4" class="javax.swing.JButton" binding="newTweetButton" custom-create="true" default-binding="true">
                         <constraints>
-                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <focusable value="false"/>
@@ -144,6 +143,7 @@
                           <gridbag weightx="0.0" weighty="0.0"/>
                         </constraints>
                         <properties>
+                          <font size="16"/>
                           <text value="Tweets"/>
                         </properties>
                       </component>
@@ -153,6 +153,7 @@
                           <gridbag weightx="0.0" weighty="0.0"/>
                         </constraints>
                         <properties>
+                          <font size="14"/>
                           <text value=""/>
                         </properties>
                       </component>
@@ -171,6 +172,7 @@
                           <gridbag weightx="0.0" weighty="0.0"/>
                         </constraints>
                         <properties>
+                          <font size="16"/>
                           <text value="Abonnements"/>
                         </properties>
                       </component>
@@ -180,6 +182,7 @@
                           <gridbag weightx="0.0" weighty="0.0"/>
                         </constraints>
                         <properties>
+                          <font size="14"/>
                           <text value=""/>
                         </properties>
                       </component>
@@ -198,6 +201,7 @@
                           <gridbag weightx="0.0" weighty="0.0"/>
                         </constraints>
                         <properties>
+                          <font size="16"/>
                           <text value="Abonnés"/>
                         </properties>
                       </component>
@@ -207,6 +211,7 @@
                           <gridbag weightx="0.0" weighty="0.0"/>
                         </constraints>
                         <properties>
+                          <font size="14"/>
                           <text value=""/>
                         </properties>
                       </component>
@@ -240,6 +245,7 @@
                           <gridbag weightx="0.0" weighty="0.0"/>
                         </constraints>
                         <properties>
+                          <font size="14"/>
                           <text value=""/>
                         </properties>
                       </component>
@@ -249,6 +255,7 @@
                           <gridbag weightx="0.0" weighty="0.0"/>
                         </constraints>
                         <properties>
+                          <font size="14"/>
                           <text value=""/>
                         </properties>
                       </component>

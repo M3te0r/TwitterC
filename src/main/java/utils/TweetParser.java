@@ -39,7 +39,9 @@ public class TweetParser {
             String userProfileURL = user.getString("profile_image_url_https");
             String screenName = user.getString("screen_name");
             String userName = user.getString("name");
-            return new TweetModel(rtedText, userProfileURL, screenName, userName, object.getLong("id"), rted.getString("created_at"));
+            int rt = rted.getInt("retweet_count");
+            int fav = rted.getInt("favorite_count");
+            return new TweetModel(rtedText, userProfileURL, screenName, userName, object.getLong("id"), rted.getString("created_at"), rt, fav);
         }
         else if (object.has("retweeted_status")){
             JSONObject rted = object.getJSONObject("retweeted_status");
@@ -48,7 +50,9 @@ public class TweetParser {
             String userProfileURL = user.getString("profile_image_url_https");
             String screenName = user.getString("screen_name");
             String userName = user.getString("name");
-            return new TweetModel(rtedText, userProfileURL, screenName, userName, object.getLong("id"), rted.getString("created_at"));
+            int rt = rted.getInt("retweet_count");
+            int fav = rted.getInt("favorite_count");
+            return new TweetModel(rtedText, userProfileURL, screenName, userName, object.getLong("id"), rted.getString("created_at"), rt, fav);
         }
         else {
             JSONObject userObject = object.getJSONObject("user");
@@ -56,7 +60,9 @@ public class TweetParser {
             String twee = object.getString("text");
             String userScreenName = userObject.getString("screen_name");
             String userName = userObject.getString("name");
-            return new TweetModel(twee, urlProfilePicture, userScreenName, userName, object.getLong("id"), object.getString("created_at"));
+            int fav = object.getInt("favorite_count");
+            int rt = object.getInt("retweet_count");
+            return new TweetModel(twee, urlProfilePicture, userScreenName, userName, object.getLong("id"), object.getString("created_at"), rt, fav);
         }
     }
 }

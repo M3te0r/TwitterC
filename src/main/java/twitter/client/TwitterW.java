@@ -12,10 +12,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
+import java.awt.event.*;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -93,6 +90,7 @@ public class TwitterW extends JFrame {
         list2.setModel(model2);
         CellRenderer renderer1 = new CellRenderer();
         CellRenderer renderer2 = new CellRenderer();
+
         list1.setCellRenderer(renderer1);
         list2.setCellRenderer(renderer2);
         reloadHomeButton.addActionListener(e -> loadUserTweetData());
@@ -145,7 +143,10 @@ public class TwitterW extends JFrame {
 
     private void parseNewTweet(String tweetResult){
         if (tweetResult != null){
-            runInvokeLater(TweetParser.parseSingle(tweetResult), 2);
+            TweetModel m = TweetParser.parseSingle(tweetResult);
+            runInvokeLater(m, 1);
+            runInvokeLater(m, 2);
+
         }
     }
 

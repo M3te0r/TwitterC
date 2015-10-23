@@ -8,10 +8,20 @@ public class TweetCellPanel {
     private JLabel userScreenName;
     private JPanel mainPanel;
     private JLabel userTweet;
+    private JLabel retweetCountLabel;
+    private JLabel favoriteCountLabel;
 
     public TweetCellPanel(){
         userTweet.setFont(userTweet.getFont().deriveFont(14f));
         UserProfilePicture.setIcon(new ImageIcon(getClass().getResource("/icons/blank_pp.png")));
+    }
+
+    public void setFavCount(int favCount){
+        favoriteCountLabel.setText(String.valueOf(favCount));
+    }
+
+    public void setRTCount(int rtCount){
+        retweetCountLabel.setText(String.valueOf(rtCount));
     }
 
     public JPanel getMainPanel()

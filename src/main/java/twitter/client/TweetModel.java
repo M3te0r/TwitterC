@@ -17,13 +17,15 @@ public class TweetModel implements Comparable<TweetModel>{
     private boolean imageLoaded;
     private long internalId;
     private Date createdAt;
+    private int favoriteCount;
+    private int retweetCount;
 
     public TweetModel()
     {
 
     }
 
-    public TweetModel(String tweetText, String userURLProfileIcon, String screenName, String name,long internalId, String formattedDate) {
+    public TweetModel(String tweetText, String userURLProfileIcon, String screenName, String name,long internalId, String formattedDate, int rt, int fav) {
         this.tweetText = tweetText;
         this.screenName = screenName;
         this.name = name;
@@ -31,6 +33,8 @@ public class TweetModel implements Comparable<TweetModel>{
         this.userURLProfilIcon = userURLProfileIcon;
         this.internalId = internalId;
         this.createdAt = DateUtils.getTwitterDate(formattedDate);
+        this.retweetCount = rt;
+        this.favoriteCount = fav;
     }
 
     public String getName() {
@@ -67,6 +71,14 @@ public class TweetModel implements Comparable<TweetModel>{
 
     public boolean isImageLoaded() {
         return imageLoaded;
+    }
+
+    public int getFavoriteCount() {
+        return favoriteCount;
+    }
+
+    public int getRetweetCount() {
+        return retweetCount;
     }
 
     public void setImageLoaded() {
