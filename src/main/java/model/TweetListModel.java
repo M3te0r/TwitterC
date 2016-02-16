@@ -4,6 +4,7 @@ import twitter.client.TweetModel;
 
 import javax.swing.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by Mathieu on 18/10/2015.
@@ -45,9 +46,8 @@ public class TweetListModel extends DefaultListModel<TweetModel> {
 
     public void sortModel(){
         List<TweetModel> list = Collections.list(elements());
-        Collections.sort(list);
         removeAllElements();
-        list.forEach(this::addElement);
+        list.parallelStream().sorted().forEachOrdered(this::addElement);
     }
 
     /**
