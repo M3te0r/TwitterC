@@ -154,7 +154,7 @@ public class TwitterW extends JFrame {
     private void renderProfileBanner(ImageIcon icon){
         userProfileBanner.setIcon(new ImageIcon(icon.getImage().getScaledInstance(300, 160, Image.SCALE_SMOOTH)));
     }
-    //TODO  : Load timelines and process
+
     private void loadUserTweetData(){
         reloadHomeButton.setEnabled(false);
         CompletableFuture future;
@@ -186,24 +186,12 @@ public class TwitterW extends JFrame {
     }
 
     private void runInvokeLater(java.util.List<TweetModel> tweets, int list){
-        if(tweets != null){
-            SwingUtilities.invokeLater(() -> {
-                switch (list) {
-                    case 1:
-                        tweets.forEach(model1::addElement);
-                        model1.sortModel();
-                        break;
-                    default:
-                        tweets.forEach(model2::addElement);
-                        model2.sortModel();
-                        break;
-                }
-            });
+        if(tweets != null)
+            SwingUtilities.invokeLater(list == 1 ? () -> { tweets.parallelStream().forEach(model1::addElement); model1.sortModel();} : () -> { tweets.parallelStream().forEach(model2::addElement); model2.sortModel();});
         }
-    }
 
     private void runInvokeLater(TweetModel tweetModel, int list){
-        SwingUtilities.invokeLater(list == 1 ? () -> {model1.addElement(tweetModel); model1.sortModel();} : () -> {model2.addElement(tweetModel); model2.sortModel();});
+        SwingUtilities.invokeLater(list == 1 ? () -> { model1.addElement(tweetModel); model1.sortModel();} : () -> { model2.addElement(tweetModel); model2.sortModel();});
     }
 
     /**
@@ -247,12 +235,7 @@ public class TwitterW extends JFrame {
                 super.paintComponent(g);
             }
         };
-        newTweetButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                newTweetPanel.setVisible(true);
-            }
-        });
+        newTweetButton.addActionListener(e -> newTweetPanel.setVisible(true));
         newTweetButton.setFont(newTweetButton.getFont().deriveFont(20f));
         newTweetButton.setIcon(new ImageIcon(getClass().getResource("/icons/new_tweet_button2.png")));
         newTweetButton.setContentAreaFilled(false);
@@ -279,30 +262,21 @@ public class TwitterW extends JFrame {
             public void insertUpdate(DocumentEvent e) {
                 int nbchar = NBMAXCHARTWEET - e.getDocument().getLength();
                 nbCharTweet.setText(String.valueOf(nbchar));
-                if (nbchar >= 0 && nbchar < 140){
-                    tweetButton.setEnabled(true);
-                }
-                else tweetButton.setEnabled(false);
+                tweetButton.setEnabled(nbchar >= 0 && nbchar < 140);
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
                 int nbchar = NBMAXCHARTWEET - e.getDocument().getLength();
                 nbCharTweet.setText(String.valueOf(nbchar));
-                if (nbchar >= 0 && nbchar < 140){
-                    tweetButton.setEnabled(true);
-                }
-                else tweetButton.setEnabled(false);
+                tweetButton.setEnabled(nbchar >= 0 && nbchar < 140);
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
                 int nbchar = NBMAXCHARTWEET - e.getDocument().getLength();
                 nbCharTweet.setText(String.valueOf(nbchar));
-                if (nbchar >= 0 && nbchar < 140){
-                    tweetButton.setEnabled(true);
-                }
-                else tweetButton.setEnabled(false);
+                tweetButton.setEnabled(nbchar >= 0 && nbchar < 140);
             }
         });
         textArea1.setFont(UIManager.getFont("Label.font").deriveFont(20f));
